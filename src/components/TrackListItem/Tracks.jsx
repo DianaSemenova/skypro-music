@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import arrTracks from "../../utils/dataTracks";
 import "./Tracks.css";
 
 export function Tracks() {
   const trackItems = arrTracks.map((track) => (
-    <div key={track.id} className="playlist__item">
+    <li key={track.id} className="playlist__item">
       <div className="playlist__track track">
         <div className="track__title">
           <div className="track__title-image">
@@ -13,25 +13,31 @@ export function Tracks() {
             </svg>
           </div>
           <div className="track__title-text">
-            <Link className="track__title-link" href="http://">
-              {track.trackName}
-              {track.remix ? (
-                <span className="track__title-span">({track.remix})</span>
-              ) : (
-                ""
-              )}
-            </Link>
+            <BrowserRouter>
+              <Link className="track__title-link" href="http://">
+                {track.trackName}
+                {track.remix ? (
+                  <span className="track__title-span">({track.remix})</span>
+                ) : (
+                  ""
+                )}
+              </Link>
+            </BrowserRouter>
           </div>
         </div>
         <div className="track__author">
-          <Link className="track__author-link" href="http://">
-            {track.trackAuthor}
-          </Link>
+          <BrowserRouter>
+            <Link className="track__author-link" href="http://">
+              {track.trackAuthor}
+            </Link>
+          </BrowserRouter>
         </div>
         <div className="track__album">
-          <Link className="track__album-link" href="http://">
-            {track.album}
-          </Link>
+          <BrowserRouter>
+            <Link className="track__album-link" href="http://">
+              {track.album}
+            </Link>
+          </BrowserRouter>
         </div>
         <div className="track__time">
           <svg className="track__time-svg" alt="time">
@@ -40,8 +46,8 @@ export function Tracks() {
           <span className="track__time-text"> {track.trackTime}</span>
         </div>
       </div>
-    </div>
+    </li>
   ));
 
-  return <div className="content__playlist playlist">{trackItems}</div>;
+  return <ul className="content__playlist playlist">{trackItems}</ul>;
 }
