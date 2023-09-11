@@ -1,7 +1,7 @@
 import "./NavMenu.css";
 import { NavMenuItems } from "../NavMenuItems/NavMenuItems";
 
-// eslint-disable-next-line import/prefer-default-export
+
 export function NavMenu() {
   return (
     <nav className="main__nav nav">
@@ -15,9 +15,10 @@ export function NavMenu() {
       </div>
       <div className="nav__menu menu">
         <ul className="menu__list">
-          <NavMenuItems item={{ link: "#", text: "Главное" }} />
+        <NavMenuItems item={{ link: "#", text: "Главное" }} />
           <NavMenuItems item={{ link: "#", text: "Мой плейлист" }} />
           <NavMenuItems item={{ link: "../signin.html", text: "Войти" }} />
+          
         </ul>
       </div>
     </nav>
