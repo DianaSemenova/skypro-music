@@ -6,19 +6,19 @@ import { Sidebar } from "./components/Sidebar/Sidebar";
 import { TrackList } from "./components/TrackList/TrackList";
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!loading) {
+    if (!isLoading) {
       const timer = setTimeout(() => {
         setLoading(true);
-      }, 10000);
+      }, 5000);
 
-      
-      return () => clearTimeout(timer); 
+      return () => clearTimeout(timer);
     }
-  }, [loading]);
 
+    console.log(isLoading);
+  }, [isLoading]);
 
   return (
     <div className="App">
@@ -26,10 +26,10 @@ function App() {
         <div className="container">
           <main className="main">
             <NavMenu />
-            <TrackList />
-            <Sidebar />
+            <TrackList isLoading={isLoading} />
+            <Sidebar isLoading={isLoading} />
           </main>
-          <AudioPlayer />
+          <AudioPlayer isLoading={isLoading}/>
           <footer className="footer" />
         </div>
       </div>

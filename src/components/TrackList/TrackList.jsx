@@ -2,7 +2,7 @@ import "./TrackList.css";
 import { Tracks } from "../TrackListItem/Tracks";
 import { TrackListTitle } from "../TracklistTitle/TrackListTitle";
 
-export function TrackList() {
+export function TrackList({ isLoading }) {
   return (
     <div className="main__centerblock centerblock">
       <div className="centerblock__search search">
@@ -26,8 +26,8 @@ export function TrackList() {
         <div className="filter__button button-genre _btn-text">жанру</div>
       </div>
       <div className="centerblock__content">
-        <TrackListTitle />
-        <Tracks />
+        <TrackListTitle/>
+        <Tracks  isLoading={isLoading}/>
       </div>
     </div>
   );
