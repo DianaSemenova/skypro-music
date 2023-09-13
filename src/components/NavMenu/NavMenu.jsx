@@ -1,6 +1,6 @@
 import "./NavMenu.css";
-import { NavMenuItems } from "../NavMenuItems/NavMenuItems";
 import { useState } from "react";
+import { NavMenuItems } from "../NavMenuItems/NavMenuItems";
 
 export function NavMenu() {
   const [visible, setVisible] = useState(false);
@@ -10,11 +10,11 @@ export function NavMenu() {
       <div className="nav__logo logo">
         <img className="logo__image" src="img/logo.png" alt="logo" />
       </div>
-      <div className="nav__burger burger" onClick={toggleVisibility}>
+      <button className="nav__burger burger" type="button" onClick={toggleVisibility}>
         <span className="burger__line" />
         <span className="burger__line" />
         <span className="burger__line" />
-      </div>
+      </button>
       {visible && (
         <div className="nav__menu menu">
           <ul className="menu__list">
