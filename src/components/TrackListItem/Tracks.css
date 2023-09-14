@@ -8,7 +8,7 @@
   }
 }
 .skeleton {
-   animation: blink 1s infinite alternate; 
+   animation: blink 2s infinite alternate; 
    background-color: #4e4e4e;
    height: 20px;
    width: 300px;
