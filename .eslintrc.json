@@ -22,6 +22,7 @@
     "react/prop-types": 0,
     "react/destructuring-assignment": [0],
     "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": ["error", {"includeInternal": true, "includeTypes": true}]
+    "import/no-extraneous-dependencies": ["error", {"includeInternal": true, "includeTypes": true}],
+    "consistent-return": "off"
   }
 }
