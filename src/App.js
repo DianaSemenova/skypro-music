@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import * as S from './App.styles'
 import { AudioPlayer } from "./components/AudioPlayer/AudioPlayer";
 import { NavMenu } from "./components/NavMenu/NavMenu";
 import { Sidebar } from "./components/Sidebar/Sidebar";
@@ -23,17 +24,17 @@ function App() {
 
   return (
     <div className="App">
-      <div className="wrapper">
-        <div className="container">
-          <main className="main">
+      <S.wrapper>
+        <S.container>
+          <S.main>
             <NavMenu />
             <TrackList isLoading={isLoading} />
             <Sidebar isLoading={isLoading} />
-          </main>
+          </S.main>
           <AudioPlayer isLoading={isLoading} />
           <footer className="footer" />
-        </div>
-      </div>
+        </S.container>
+      </S.wrapper>
     </div>
   );
 }
