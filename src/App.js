@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { GlobalStyle } from "./App.styles";
 import { AudioPlayer } from "./components/AudioPlayer/AudioPlayer";
 import { NavMenu } from "./components/NavMenu/NavMenu";
 import { Sidebar } from "./components/Sidebar/Sidebar";
@@ -24,7 +23,6 @@ function App() {
 
   return (
     <div className="App">
-       <GlobalStyle />
       <div className="wrapper">
         <div className="container">
           <main className="main">
