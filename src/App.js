@@ -1,9 +1,11 @@
-import "./App.css";
 import { useState, useEffect } from "react";
+import "./App.css";
+import { GlobalStyle } from "./App.styles";
 import { AudioPlayer } from "./components/AudioPlayer/AudioPlayer";
 import { NavMenu } from "./components/NavMenu/NavMenu";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { TrackList } from "./components/TrackList/TrackList";
+
 
 function App() {
   const [isLoading, setLoading] = useState(false);
@@ -22,6 +24,7 @@ function App() {
 
   return (
     <div className="App">
+       <GlobalStyle />
       <div className="wrapper">
         <div className="container">
           <main className="main">
@@ -29,7 +32,7 @@ function App() {
             <TrackList isLoading={isLoading} />
             <Sidebar isLoading={isLoading} />
           </main>
-          <AudioPlayer isLoading={isLoading}/>
+          <AudioPlayer isLoading={isLoading} />
           <footer className="footer" />
         </div>
       </div>
