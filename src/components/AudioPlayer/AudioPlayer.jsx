@@ -1,40 +1,21 @@
-import "./AudioPlayer.css";
+import * as S from "./AudioPlayer.styles";
+import { AudioPlayerIcons } from "../AdioPlayerIcons/AudioPlayerIcons";
 
 export function AudioPlayer({ isLoading }) {
   return (
-    <div className="bar">
-      <div className="bar__content">
+    <S.bar>
+      <S.barContent>
         <div className="bar__player-progress" />
-        <div className="bar__player-block">
-          <div className="bar__player player">
-            <div className="player__controls">
-              <div className="player__btn-prev">
-                <svg className="player__btn-prev-svg" alt="prev">
-                  <use xlinkHref="img/icon/sprite.svg#icon-prev" />
-                </svg>
-              </div>
-              <div className="player__btn-play _btn">
-                <svg className="player__btn-play-svg" alt="play">
-                  <use xlinkHref="img/icon/sprite.svg#icon-play" />
-                </svg>
-              </div>
-              <div className="player__btn-next">
-                <svg className="player__btn-next-svg" alt="next">
-                  <use xlinkHref="img/icon/sprite.svg#icon-next" />
-                </svg>
-              </div>
-              <div className="player__btn-repeat _btn-icon">
-                <svg className="player__btn-repeat-svg" alt="repeat">
-                  <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
-                </svg>
-              </div>
-              <div className="player__btn-shuffle _btn-icon">
-                <svg className="player__btn-shuffle-svg" alt="shuffle">
-                  <use xlinkHref="img/icon/sprite.svg#icon-shuffle" />
-                </svg>
-              </div>
-            </div>
-            <div className="player__track-play track-play">
+        <S.barPlayerBlock>
+          <S.barPlayer>
+            <S.playerControls>
+              <AudioPlayerIcons alt="prev"/>
+              <AudioPlayerIcons alt="play"/>
+              <AudioPlayerIcons alt="next"/>
+              <AudioPlayerIcons alt="repeat"/>
+              <AudioPlayerIcons alt="shuffle"/>
+            </S.playerControls>
+            <S.playerTrackPlay>
               <div className="track-play__contain">
                 <div className="track-play__image">
                   <svg className="track-play__svg" alt="music">
@@ -74,9 +55,9 @@ export function AudioPlayer({ isLoading }) {
                   </svg>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="bar__volume-block volume">
+            </S.playerTrackPlay>
+          </S.barPlayer>
+          <S.barVolumeBlock>
             <div className="volume__content">
               <div className="volume__image">
                 <svg className="volume__svg" alt="volume">
@@ -91,9 +72,9 @@ export function AudioPlayer({ isLoading }) {
                 />
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </S.barVolumeBlock>
+        </S.barPlayerBlock>
+      </S.barContent>
+    </S.bar>
   );
 }
