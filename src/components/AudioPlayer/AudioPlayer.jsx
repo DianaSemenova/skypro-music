@@ -5,73 +5,73 @@ export function AudioPlayer({ isLoading }) {
   return (
     <S.bar>
       <S.barContent>
-        <div className="bar__player-progress" />
+        <S.barPlayerProgress />
         <S.barPlayerBlock>
           <S.barPlayer>
             <S.playerControls>
-              <AudioPlayerIcons alt="prev"/>
-              <AudioPlayerIcons alt="play"/>
-              <AudioPlayerIcons alt="next"/>
-              <AudioPlayerIcons alt="repeat"/>
-              <AudioPlayerIcons alt="shuffle"/>
+              <AudioPlayerIcons alt="prev" />
+              <AudioPlayerIcons alt="play" />
+              <AudioPlayerIcons alt="next" />
+              <AudioPlayerIcons alt="repeat" />
+              <AudioPlayerIcons alt="shuffle" />
             </S.playerControls>
             <S.playerTrackPlay>
-              <div className="track-play__contain">
-                <div className="track-play__image">
-                  <svg className="track-play__svg" alt="music">
+              <S.trackPlayContain>
+                <S.trackPlayImage>
+                  <S.trackPlaySvg alt="music">
                     <use xlinkHref="img/icon/sprite.svg#icon-note" />
-                  </svg>
-                </div>
+                  </S.trackPlaySvg>
+                </S.trackPlayImage>
 
                 {isLoading ? (
-                  <div className="track-play__author">
-                    <a className="track-play__author-link" href="http://">
+                  <S.trackPlayAuthor>
+                    <S.trackPlayAuthorLink href="http://">
                       Ты та...
-                    </a>
-                  </div>
+                    </S.trackPlayAuthorLink>
+                  </S.trackPlayAuthor>
                 ) : (
                   <div className="skeleton"> </div>
                 )}
-                
+
                 {isLoading ? (
-                  <div className="track-play__album">
-                    <a className="track-play__album-link" href="http://">
+                  <S.trackPlayAlbum>
+                    <S.trackPlayAlbumLink href="http://">
                       Баста
-                    </a>
-                  </div>
+                    </S.trackPlayAlbumLink>
+                  </S.trackPlayAlbum>
                 ) : (
                   <div className="skeleton"> </div>
                 )}
-              </div>
-              <div className="track-play__like-dis">
-                <div className="track-play__like _btn-icon">
-                  <svg className="track-play__like-svg" alt="like">
+              </S.trackPlayContain>
+              <S.trackPlayLikeDis>
+                <S.trackPlayLike>
+                  <S.trackPlayLikeSvg alt="like">
                     <use xlinkHref="img/icon/sprite.svg#icon-like" />
-                  </svg>
-                </div>
-                <div className="track-play__dislike _btn-icon">
-                  <svg className="track-play__dislike-svg" alt="dislike">
+                  </S.trackPlayLikeSvg>
+                </S.trackPlayLike>
+                <S.trackPlayDislike>
+                  <S.trackPlayDislikeSvg alt="dislike">
                     <use xlinkHref="img/icon/sprite.svg#icon-dislike" />
-                  </svg>
-                </div>
-              </div>
+                  </S.trackPlayDislikeSvg>
+                </S.trackPlayDislike>
+              </S.trackPlayLikeDis>
             </S.playerTrackPlay>
           </S.barPlayer>
           <S.barVolumeBlock>
-            <div className="volume__content">
-              <div className="volume__image">
-                <svg className="volume__svg" alt="volume">
+            <S.volumeContent>
+              <S.volumeImage>
+                <S.volumeSvg alt="volume">
                   <use xlinkHref="img/icon/sprite.svg#icon-volume" />
-                </svg>
-              </div>
-              <div className="volume__progress _btn">
-                <input
+                </S.volumeSvg>
+              </S.volumeImage>
+              <S.volumeProgress>
+                <S.volumeProgressLine $style="input"
                   className="volume__progress-line _btn"
                   type="range"
                   name="range"
                 />
-              </div>
-            </div>
+              </S.volumeProgress>
+            </S.volumeContent>
           </S.barVolumeBlock>
         </S.barPlayerBlock>
       </S.barContent>

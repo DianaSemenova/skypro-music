@@ -77,5 +77,17 @@ const playerBtnSvgMixin = (alt) => {
 };
 
 export const playerBtnSvg = styled.svg`
+  width: 15px;
+  height: 14px;
+  &:hover {
+    fill: transparent;
+    stroke: #acacac;
+    cursor: pointer;
+  }
+  &:active {
+    fill: transparent;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
   ${(props) => playerBtnSvgMixin(props.$style)}
-`
+`;
