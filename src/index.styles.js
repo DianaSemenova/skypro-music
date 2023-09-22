@@ -1,6 +1,17 @@
 import  { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+
+@font-face {
+  font-family: "StratosSkyeng";
+  src:
+    local("StratosSkyeng"),
+    local("StratosSkyeng"),
+    url("/public/fonts/StratosSkyeng.woff2") format("woff2"),
+    url("/public/fonts/StratosSkyeng.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+} 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -42,17 +53,7 @@ code {
   ul li {
     list-style: none;
   }
-
-  @font-face {
-    font-family: "StratosSkyeng";
-    src:
-      local("StratosSkyeng"),
-      local("StratosSkyeng"),
-      url("/public/fonts/StratosSkyeng.woff2") format("woff2"),
-      url("/public/fonts/StratosSkyeng.woff") format("woff");
-    font-weight: 400;
-    font-style: normal;
-  }  
+ 
   html,
   body {
     width: 100%;

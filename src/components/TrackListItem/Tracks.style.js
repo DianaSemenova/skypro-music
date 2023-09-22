@@ -20,7 +20,7 @@ export const Skeleton = styled.div `
 export const skeletonAlbum = styled(Skeleton)`
   width: 100px;  
 `;
-export const skeletonSidebar = styled(Skeleton)`
+export const SkeletonSidebar = styled(Skeleton)`
   width: 250px;
   height: 150px;
 `;

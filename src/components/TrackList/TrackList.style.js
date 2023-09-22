@@ -33,17 +33,17 @@ export const searchSvg = styled.svg`
 `;
 
 export const searchText = styled.input`
-    -webkit-box-flex: 100;
-    -ms-flex-positive: 100;
-    flex-grow: 100;
-    background-color: transparent;
-    border: none;
-    padding: 13px 10px 14px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #ffffff;
+  -webkit-box-flex: 100;
+  -ms-flex-positive: 100;
+  flex-grow: 100;
+  background-color: transparent;
+  border: none;
+  padding: 13px 10px 14px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
   &::-webkit-input-placeholder {
     background-color: transparent;
     color: #ffffff;
@@ -52,7 +52,7 @@ export const searchText = styled.input`
     font-size: 16px;
     line-height: 24px;
   }
-  
+
   &:-ms-input-placeholder {
     background-color: transparent;
     color: #ffffff;
@@ -61,7 +61,7 @@ export const searchText = styled.input`
     font-size: 16px;
     line-height: 24px;
   }
-  
+
   &::-ms-input-placeholder {
     background-color: transparent;
     color: #ffffff;
@@ -71,14 +71,14 @@ export const searchText = styled.input`
     line-height: 24px;
   }
   ::placeholder {
-      background-color: transparent;
-      color: #ffffff;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
+    background-color: transparent;
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
   }
-  `;
+`;
 
 export const centerblockH2 = styled.h2`
   font-style: normal;
@@ -87,7 +87,6 @@ export const centerblockH2 = styled.h2`
   line-height: 72px;
   letter-spacing: -0.8px;
   margin-bottom: 45px;
-  text-align: center;
 `;
 
 export const centerblockContent = styled.div`
