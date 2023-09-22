@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import * as S from './App.styles'
 import { AudioPlayer } from "./components/AudioPlayer/AudioPlayer";
 import { NavMenu } from "./components/NavMenu/NavMenu";
@@ -19,7 +18,6 @@ function App() {
       return () => clearTimeout(timer);
     }
 
-    console.log(isLoading);
   }, [isLoading]);
 
   return (
