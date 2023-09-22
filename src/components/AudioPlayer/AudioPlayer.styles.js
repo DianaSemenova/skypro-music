@@ -256,17 +256,3 @@ export const volumeProgressLine = styled.input `
   width: 109px;
   cursor: pointer;
 `
-
-// .volume__progress-line {
-//   width: 109px;
-// }
-
-// ._btn {
-//   cursor: pointer;
-// }
-
-// ._btn-text:hover {
-//   border-color: #d9b6ff;
-//   color: #d9b6ff;
-//   cursor: pointer;
-// }
