@@ -27,7 +27,7 @@ export function Tracks({ isLoading }) {
               </BrowserRouter>
             </div>
           ) : (
-            <div className="skeleton"> </div>
+            <S.Skeleton> </S.Skeleton>
           )}
         </S.trackTitle>
 
@@ -40,7 +40,7 @@ export function Tracks({ isLoading }) {
             </BrowserRouter>
           </S.trackAuthor>
         ) : (
-          <div className="skeleton"> </div>
+          <S.Skeleton> </S.Skeleton>
         )}
 
         {isLoading ? (
@@ -52,7 +52,7 @@ export function Tracks({ isLoading }) {
             </BrowserRouter>
           </S.trackAlbum>
         ) : (
-          <div className="skeleton skeleton__album"> </div>
+          <S.skeletonAlbum> </S.skeletonAlbum>
         )}
 
         <div className="track__time">

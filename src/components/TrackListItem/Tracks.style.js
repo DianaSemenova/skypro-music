@@ -1,29 +1,35 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 
-// const blink = `@keyframes blink {
-//   from {
-//     opacity: 1;
-//   }
+export const blink = keyframes`
+  from {
+    opacity: 1;
+  }
 
-//   to {
-//     opacity: 0.2;
-//   }
-// }`;
-// .skeleton {
-//    animation: blink 2s infinite alternate; 
-//    background-color: #4e4e4e;
-//    height: 20px;
-//    width: 300px;
-   
-// }
-// .skeleton__album {
-//   width: 100px;  
-// }
-// .skeleton__sidebar {
-//   width: 250px;
-//   height: 150px;
-// }
+  to {
+    opacity: 0.2;
+  }
+
+`;
+export const Skeleton = styled.div `
+   animation: ${blink} 2s infinite alternate; 
+   background-color: #4e4e4e;
+   height: 20px;
+   width: 300px;
+`;
+export const skeletonAlbum = styled(Skeleton)`
+  width: 100px;  
+`;
+export const skeletonSidebar = styled(Skeleton)`
+  width: 250px;
+  height: 150px;
+`;
+export const SkeletonPlayBar = styled(Skeleton)`
+  width: 50px;
+`;
+
+
+
 
 export const contentPlaylist = styled.ul `
   display: -webkit-box;

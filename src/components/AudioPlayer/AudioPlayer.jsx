@@ -1,4 +1,5 @@
 import * as S from "./AudioPlayer.styles";
+import { SkeletonPlayBar } from "../TrackListItem/Tracks.style";
 import { AudioPlayerIcons } from "../AdioPlayerIcons/AudioPlayerIcons";
 
 export function AudioPlayer({ isLoading }) {
@@ -30,7 +31,7 @@ export function AudioPlayer({ isLoading }) {
                     </S.trackPlayAuthorLink>
                   </S.trackPlayAuthor>
                 ) : (
-                  <div className="skeleton"> </div>
+                  <SkeletonPlayBar> </SkeletonPlayBar>
                 )}
 
                 {isLoading ? (
@@ -40,7 +41,7 @@ export function AudioPlayer({ isLoading }) {
                     </S.trackPlayAlbumLink>
                   </S.trackPlayAlbum>
                 ) : (
-                  <div className="skeleton"> </div>
+                  <SkeletonPlayBar> </SkeletonPlayBar>
                 )}
               </S.trackPlayContain>
               <S.trackPlayLikeDis>
