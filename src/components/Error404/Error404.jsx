@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import * as S from "./Error404.styles";
+import * as S from "./Error404.style";
 import * as Styled from "../TrackList/TrackList.style";
 
 export function Error404() {

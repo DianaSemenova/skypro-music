@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import * as S from "./main.styles";
+import * as S from "./main.style";
 import { AudioPlayer } from "../../components/AudioPlayer/AudioPlayer";
 import { NavMenu } from "../../components/NavMenu/NavMenu";
 import { Sidebar } from "../../components/Sidebar/Sidebar";

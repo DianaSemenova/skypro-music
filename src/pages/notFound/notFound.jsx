@@ -1,4 +1,4 @@
-import * as S from "../main/main.styles";
+import * as S from "../main/main.style";
 import { AudioPlayer } from "../../components/AudioPlayer/AudioPlayer";
 import { Error404 } from "../../components/Error404/Error404";
 
@@ -7,7 +7,7 @@ export function NotFound() {
     <S.wrapper>
       <S.container>
         <S.main>
-          <Error404/>
+          <Error404 />
         </S.main>
         <AudioPlayer />
         <footer className="footer" />
