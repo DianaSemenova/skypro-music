@@ -1,12 +1,11 @@
-import * as S from "./sigIn.style";
+import * as S from "./login.style";
 import { SignInForm } from "../../components/SignInForm/SignInForm";
 
-export function Login() {
+export function SignIn() {
   return (
     <S.Wrapper>
       <S.ContainerEnter>
         <S.ModalBlock>
-          <div>test</div>
           <SignInForm />
         </S.ModalBlock>
       </S.ContainerEnter>
