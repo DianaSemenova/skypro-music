@@ -18,8 +18,8 @@ export function NavMenu() {
       {visible && (
         <S.navMenu>
           <S.menuList>
-            <NavMenuItems item={{ link: "#", text: "Главное" }} />
-            <NavMenuItems item={{ link: "#", text: "Мой плейлист" }} />
+            <NavMenuItems item={{ link: "/", text: "Главное" }} />
+            <NavMenuItems item={{ link: "/favorites", text: "Мой плейлист" }} />
             <NavMenuItems item={{ link: "../signin.html", text: "Войти" }} />
           </S.menuList>
         </S.navMenu>
