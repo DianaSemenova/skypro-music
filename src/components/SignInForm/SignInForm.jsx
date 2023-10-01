@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import * as S from "./SignInForm.style";
 
-export function SignInForm() {
+export function SignInForm({ onAuthButtonClick }) {
   const navigate = useNavigate();
   return (
     <S.ModalFormLogin action="#">
@@ -13,7 +13,15 @@ export function SignInForm() {
       </NavLink>
       <S.ModalInputLogin type="text" name="login" placeholder="Почта" />
       <S.ModalInput type="password" name="password" placeholder="Пароль" />
-      <S.ModalBtnEnter type="button">Войти</S.ModalBtnEnter>
+      <S.ModalBtnEnter
+        type="button"
+        onClick={() => {
+          onAuthButtonClick();
+          navigate("/", { replace: false });
+        }}
+      >
+        Войти
+      </S.ModalBtnEnter>
       <S.ModalBtnSignUp type="button" onClick={() => navigate("/signUp")}>
         Зарегистрироваться
       </S.ModalBtnSignUp>
