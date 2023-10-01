@@ -9,8 +9,10 @@ import { getTracksAll } from "../../Api";
 export function Main() {
   const [isLoading, setLoading] = useState(false);
   const [tracks, setTracks] = useState([]);
-  const [clickTrack, setClickTrack] = useState(false);
-  const toggleClickTrack = () => setClickTrack(true);
+  const [currentTrack, setCurrentTrack] = useState(null);
+  const handleCurrentTrack = (track) => setCurrentTrack(track);
+  console.log(currentTrack);
+
 
   useEffect(() => {
     if (!isLoading) {
@@ -40,11 +42,11 @@ export function Main() {
             <TrackList
               isLoading={isLoading}
               tracks={tracks}
-              toggleClickTrack={toggleClickTrack}
+              handleCurrentTrack={handleCurrentTrack}
             />
             <Sidebar isLoading={isLoading} />
           </S.main>
-          {clickTrack && <AudioPlayer isLoading={isLoading} />}
+          {currentTrack && <AudioPlayer isLoading={isLoading} currentTrack={currentTrack}/>}
           <footer className="footer" />
         </S.container>
       </S.wrapper>
