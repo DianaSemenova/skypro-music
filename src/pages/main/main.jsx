@@ -12,7 +12,7 @@ export function Main() {
   const [currentTrack, setCurrentTrack] = useState(null);
   const handleCurrentTrack = (track) => setCurrentTrack(track);
   console.log(currentTrack);
-
+  const [loadingTracksError, setLoadingTracksError] = useState(null);
 
   useEffect(() => {
     if (!isLoading) {
@@ -25,10 +25,14 @@ export function Main() {
   }, [isLoading]);
 
   useEffect(() => {
-    getTracksAll().then((track) => {
-      console.log(track);
-      setTracks(track);
-    });
+    try {
+      getTracksAll().then((track) => {
+        console.log(track);
+        setTracks(track);
+      });
+    } catch (error) {
+      setLoadingTracksError(error.message)
+    }
   }, []);
 
   console.log(tracks);
@@ -43,10 +47,13 @@ export function Main() {
               isLoading={isLoading}
               tracks={tracks}
               handleCurrentTrack={handleCurrentTrack}
+              loadingTracksError={loadingTracksError}
             />
             <Sidebar isLoading={isLoading} />
           </S.main>
-          {currentTrack && <AudioPlayer isLoading={isLoading} currentTrack={currentTrack}/>}
+          {currentTrack && (
+            <AudioPlayer isLoading={isLoading} currentTrack={currentTrack} />
+          )}
           <footer className="footer" />
         </S.container>
       </S.wrapper>
