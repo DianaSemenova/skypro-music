@@ -1,8 +1,20 @@
-import arrTracks from "../../utils/dataTracks";
+import { useState, useEffect } from "react";
 import * as S from "./Tracks.style";
+import { getTracksAll } from "../../Api";
 
 export function Tracks({ isLoading }) {
-  const trackItems = arrTracks.map((track) => (
+  const [tracks, setTracks] = useState([]);
+
+  useEffect(() => {
+    getTracksAll().then((track) => {
+      console.log(track);
+      setTracks(track);
+    });
+  }, []);
+
+  console.log(tracks);
+
+  const trackItems = tracks.map((track) => (
     <S.playlistItem key={track.id}>
       <S.playlistTrack>
         <S.trackTitle>
@@ -14,14 +26,14 @@ export function Tracks({ isLoading }) {
 
           {isLoading ? (
             <div className="track__title-text">
-                <S.trackTitleLink href="http://">
-                  {track.trackName}
-                  {track.remix ? (
-                    <S.trackTitleSpan>({track.remix})</S.trackTitleSpan>
-                  ) : (
-                    ""
-                  )}
-                </S.trackTitleLink>
+              <S.trackTitleLink href="http://">
+                {track.name}
+                {track.remix ? (
+                  <S.trackTitleSpan>({track.remix})</S.trackTitleSpan>
+                ) : (
+                  ""
+                )}
+              </S.trackTitleLink>
             </div>
           ) : (
             <S.Skeleton> </S.Skeleton>
@@ -30,9 +42,7 @@ export function Tracks({ isLoading }) {
 
         {isLoading ? (
           <S.trackAuthor>
-              <S.trackAuthorLink href="http://">
-                {track.trackAuthor}
-              </S.trackAuthorLink>
+            <S.trackAuthorLink href="http://">{track.author}</S.trackAuthorLink>
           </S.trackAuthor>
         ) : (
           <S.Skeleton> </S.Skeleton>
@@ -40,9 +50,7 @@ export function Tracks({ isLoading }) {
 
         {isLoading ? (
           <S.trackAlbum>
-              <S.trackAlbumLink href="http://">
-                {track.album}
-              </S.trackAlbumLink>
+            <S.trackAlbumLink href="http://">{track.album}</S.trackAlbumLink>
           </S.trackAlbum>
         ) : (
           <S.skeletonAlbum> </S.skeletonAlbum>
@@ -52,7 +60,7 @@ export function Tracks({ isLoading }) {
           <S.trackTimeSvg alt="time">
             <use xlinkHref="img/icon/sprite.svg#icon-like" />
           </S.trackTimeSvg>
-          <S.trackTimeText> {track.trackTime}</S.trackTimeText>
+          <S.trackTimeText> {track.duration_in_seconds}</S.trackTimeText>
         </div>
       </S.playlistTrack>
     </S.playlistItem>
