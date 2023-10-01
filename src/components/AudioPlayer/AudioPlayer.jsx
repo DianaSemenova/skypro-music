@@ -66,7 +66,8 @@ export function AudioPlayer({ isLoading }) {
                 </S.volumeSvg>
               </S.volumeImage>
               <S.volumeProgress>
-                <S.volumeProgressLine $style="input"
+                <S.volumeProgressLine
+                  $style="input"
                   className="volume__progress-line _btn"
                   type="range"
                   name="range"

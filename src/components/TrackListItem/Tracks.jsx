@@ -1,21 +1,8 @@
-import { useState, useEffect } from "react";
 import * as S from "./Tracks.style";
-import { getTracksAll } from "../../Api";
 
-export function Tracks({ isLoading }) {
-  const [tracks, setTracks] = useState([]);
-
-  useEffect(() => {
-    getTracksAll().then((track) => {
-      console.log(track);
-      setTracks(track);
-    });
-  }, []);
-
-  console.log(tracks);
-
+export function Tracks({ isLoading, tracks, toggleClickTrack }) {
   const trackItems = tracks.map((track) => (
-    <S.playlistItem key={track.id}>
+    <S.playlistItem key={track.id} onClick={toggleClickTrack}>
       <S.playlistTrack>
         <S.trackTitle>
           <S.trackTitleImage>

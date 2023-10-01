@@ -3,7 +3,7 @@ import { Tracks } from "../TrackListItem/Tracks";
 import { TrackListTitle } from "../TracklistTitle/TrackListTitle";
 import { TrackListFilter } from "../TrackListFilter/TrackListFilter";
 
-export function TrackList({ isLoading }) {
+export function TrackList({ isLoading, tracks, toggleClickTrack }) {
   return (
     <S.MainCenterBlock>
       <S.CenterBlockSearch>
@@ -16,7 +16,11 @@ export function TrackList({ isLoading }) {
       <TrackListFilter />
       <S.centerblockContent>
         <TrackListTitle />
-        <Tracks isLoading={isLoading} />
+        <Tracks
+          isLoading={isLoading}
+          tracks={tracks}
+          toggleClickTrack={toggleClickTrack}
+        />
       </S.centerblockContent>
     </S.MainCenterBlock>
   );
