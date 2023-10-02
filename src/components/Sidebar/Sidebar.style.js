@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const mainSidebar = styled.div`
   max-width: 418px;
@@ -53,7 +54,7 @@ export const sidebarBlock = styled.div`
   justify-content: flex-start;
 `;
 
-export const sidebarList = styled.div`
+export const sidebarList = styled.ul`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -64,4 +65,20 @@ export const sidebarList = styled.div`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+`;
+export const SidebarItem = styled.li`
+  width: 250px;
+  height: 150px;
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+`;
+export const SidebarLink = styled(NavLink)`
+  width: 100%;
+  height: 100%;
+`;
+
+export const SidebarImg = styled.img`
+  width: 100%;
+  height: auto;
 `;

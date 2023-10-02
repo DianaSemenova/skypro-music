@@ -1,4 +1,3 @@
-import { BrowserRouter } from "react-router-dom";
 import arrTracks from "../../utils/dataTracks";
 import * as S from "./Tracks.style";
 
@@ -15,7 +14,6 @@ export function Tracks({ isLoading }) {
 
           {isLoading ? (
             <div className="track__title-text">
-              <BrowserRouter>
                 <S.trackTitleLink href="http://">
                   {track.trackName}
                   {track.remix ? (
@@ -24,7 +22,6 @@ export function Tracks({ isLoading }) {
                     ""
                   )}
                 </S.trackTitleLink>
-              </BrowserRouter>
             </div>
           ) : (
             <S.Skeleton> </S.Skeleton>
@@ -33,11 +30,9 @@ export function Tracks({ isLoading }) {
 
         {isLoading ? (
           <S.trackAuthor>
-            <BrowserRouter>
               <S.trackAuthorLink href="http://">
                 {track.trackAuthor}
               </S.trackAuthorLink>
-            </BrowserRouter>
           </S.trackAuthor>
         ) : (
           <S.Skeleton> </S.Skeleton>
@@ -45,11 +40,9 @@ export function Tracks({ isLoading }) {
 
         {isLoading ? (
           <S.trackAlbum>
-            <BrowserRouter>
               <S.trackAlbumLink href="http://">
                 {track.album}
               </S.trackAlbumLink>
-            </BrowserRouter>
           </S.trackAlbum>
         ) : (
           <S.skeletonAlbum> </S.skeletonAlbum>
