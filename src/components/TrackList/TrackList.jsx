@@ -22,7 +22,7 @@ export function TrackList({
       <S.centerblockContent>
         <TrackListTitle />
         {loadingTracksError ? (
-          `${loadingTracksError}`
+          <div>Не удалось загрузить плейлист, попробуйте позже</div>
         ) : (
           <Tracks
             isLoading={isLoading}
