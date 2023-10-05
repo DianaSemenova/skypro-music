@@ -10,11 +10,26 @@ export function AudioPlayer({ isLoading, currentTrack }) {
         <S.barPlayerBlock>
           <S.barPlayer>
             <S.playerControls>
-              <AudioPlayerIcons alt="prev" />
+              <AudioPlayerIcons
+                onclick={() => {
+                  alert("Еще не реализовано");
+                }}
+                alt="prev"
+              />
               <AudioPlayerIcons alt="play" />
-              <AudioPlayerIcons alt="next" />
+              <AudioPlayerIcons
+                onclick={() => {
+                  alert("Еще не реализовано");
+                }}
+                alt="next"
+              />
               <AudioPlayerIcons alt="repeat" />
-              <AudioPlayerIcons alt="shuffle" />
+              <AudioPlayerIcons
+                onclick={() => {
+                  alert("Еще не реализовано");
+                }}
+                alt="shuffle"
+              />
             </S.playerControls>
             <S.playerTrackPlay>
               <S.trackPlayContain>
@@ -27,7 +42,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
                 {isLoading ? (
                   <S.trackPlayAuthor>
                     <S.trackPlayAuthorLink href="http://">
-                    {currentTrack.name}
+                      {currentTrack.name}
                     </S.trackPlayAuthorLink>
                   </S.trackPlayAuthor>
                 ) : (

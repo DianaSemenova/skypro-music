@@ -11,7 +11,6 @@ export function Main() {
   const [tracks, setTracks] = useState([]);
   const [currentTrack, setCurrentTrack] = useState(null);
   const handleCurrentTrack = (track) => setCurrentTrack(track);
-  console.log(currentTrack);
   const [loadingTracksError, setLoadingTracksError] = useState(null);
 
   useEffect(() => {
@@ -27,15 +26,12 @@ export function Main() {
   useEffect(() => {
     getTracksAll()
       .then((track) => {
-        console.log(track);
         setTracks(track);
       })
       .catch((error) => {
         setLoadingTracksError(error.message);
       });
   }, []);
-
-  console.log(tracks);
 
   return (
     <div className="App">
