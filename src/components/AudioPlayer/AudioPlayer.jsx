@@ -1,34 +1,51 @@
+import { useRef } from "react";
 import * as S from "./AudioPlayer.styles";
 import { SkeletonPlayBar } from "../TrackListItem/Tracks.style";
 import { AudioPlayerIcons } from "../AdioPlayerIcons/AudioPlayerIcons";
 
 export function AudioPlayer({ isLoading, currentTrack }) {
+  // const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+  console.log(audioRef);
+
+  // const handleStart = () => {
+  //   audioRef.current.play();
+  //   setIsPlaying(true);
+  // };
+
+  // const handleStop = () => {
+  //   audioRef.current.pause();
+  //   setIsPlaying(false);
+  // };
+
+  // const togglePlay = isPlaying ? handleStop : handleStart;
   return (
     <S.bar>
+      <audio controls src={currentTrack.track_file} />
       <S.barContent>
         <S.barPlayerProgress />
         <S.barPlayerBlock>
           <S.barPlayer>
             <S.playerControls>
               <AudioPlayerIcons
-                onclick={() => {
+                alt="prev"
+                click={() => {
                   alert("Еще не реализовано");
                 }}
-                alt="prev"
               />
               <AudioPlayerIcons alt="play" />
               <AudioPlayerIcons
-                onclick={() => {
+                alt="next"
+                click={() => {
                   alert("Еще не реализовано");
                 }}
-                alt="next"
               />
               <AudioPlayerIcons alt="repeat" />
               <AudioPlayerIcons
-                onclick={() => {
+                alt="shuffle"
+                click={() => {
                   alert("Еще не реализовано");
                 }}
-                alt="shuffle"
               />
             </S.playerControls>
             <S.playerTrackPlay>
