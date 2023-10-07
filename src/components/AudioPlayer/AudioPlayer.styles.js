@@ -8,10 +8,6 @@ export const bar = styled.div`
   background: rgba(28, 28, 28, 0.9);
 `;
 
-export const Audio = styled.div`
-  display: none;
-`;
-
 export const barContent = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
