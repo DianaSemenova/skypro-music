@@ -1,27 +1,32 @@
-import { useRef } from "react";
+/* eslint-disable jsx-a11y/media-has-caption */
+import { useRef, useState, useEffect } from "react";
 import * as S from "./AudioPlayer.styles";
 import { SkeletonPlayBar } from "../TrackListItem/Tracks.style";
 import { AudioPlayerIcons } from "../AdioPlayerIcons/AudioPlayerIcons";
 
 export function AudioPlayer({ isLoading, currentTrack }) {
-  // const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   console.log(audioRef);
 
-  // const handleStart = () => {
-  //   audioRef.current.play();
-  //   setIsPlaying(true);
-  // };
+  const handleStart = () => {
+    audioRef.current.play()
+    setIsPlaying(true)
+  }
+  const handleStop = () => {
+    audioRef.current.pause()
+    setIsPlaying(false)
+  }
+  const togglePlay = isPlaying ? handleStop : handleStart
 
-  // const handleStop = () => {
-  //   audioRef.current.pause();
-  //   setIsPlaying(false);
-  // };
+  useEffect(() => {
+      handleStart()
+  }, [currentTrack])
 
-  // const togglePlay = isPlaying ? handleStop : handleStart;
+
   return (
     <S.bar>
-      <audio controls src={currentTrack.track_file} />
+      <audio src={currentTrack.track_file} ref={audioRef}/>
       <S.barContent>
         <S.barPlayerProgress />
         <S.barPlayerBlock>
@@ -33,7 +38,10 @@ export function AudioPlayer({ isLoading, currentTrack }) {
                   alert("Еще не реализовано");
                 }}
               />
-              <AudioPlayerIcons alt="play" />
+              <AudioPlayerIcons
+                alt={isPlaying ? "pause" : "play"}
+                click={togglePlay}
+              />
               <AudioPlayerIcons
                 alt="next"
                 click={() => {

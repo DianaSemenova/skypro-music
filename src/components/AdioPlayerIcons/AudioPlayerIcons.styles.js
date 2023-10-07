@@ -7,6 +7,9 @@ const icons = {
   play: css`
     margin-right: 23px;
   `,
+  pause: css`
+    margin-right: 23px;
+  `,
   next: css`
     margin-right: 28px;
     fill: #a53939;
@@ -50,6 +53,12 @@ const iconsSvg = {
     width: 22px;
     height: 20px;
     fill: #d9d9d9;
+  `,
+
+  pause: css`
+    width: 22px;
+    height: 20px;
+    flex-shrink: 0;
   `,
   next: css`
     width: 15px;

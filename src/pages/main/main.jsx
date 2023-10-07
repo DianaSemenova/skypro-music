@@ -52,7 +52,10 @@ export function Main() {
             />
           </S.main>
           {currentTrack && (
-            <AudioPlayer isLoading={isLoading} currentTrack={currentTrack} />
+            <AudioPlayer
+              isLoading={isLoading}
+              currentTrack={currentTrack}
+            />
           )}
           <footer className="footer" />
         </S.container>

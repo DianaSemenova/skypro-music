@@ -8,6 +8,9 @@ export const bar = styled.div`
   background: rgba(28, 28, 28, 0.9);
 `;
 
+export const Audio = styled.div`
+  display: none;
+`;
 
 export const barContent = styled.div`
   display: -webkit-box;
@@ -174,54 +177,50 @@ export const btnIcon = styled.div`
   &:hover svg {
     fill: transparent;
     stroke: #acacac;
-    cursor: pointer; 
-  }   
+    cursor: pointer;
+  }
 
   &:active svg {
     border-color: #ad61ff;
     color: #ad61ff;
     cursor: pointer;
-  }   
-  
+  }
+
   &:active svg {
     fill: transparent;
     stroke: #ffffff;
-    cursor: pointer; 
-  }   
-  
+    cursor: pointer;
+  }
+
   &:active svg {
     fill: #696969;
     stroke: #ffffff;
-    cursor: pointer; 
-  }   
-  
-  `;
-
-
-  export const trackPlayLike = styled(btnIcon)`
-    padding: 5px;  
-  `;
-  export const trackPlayDislike = styled(btnIcon)`
-    padding: 5px; 
-    margin-left: 28.5px;
+    cursor: pointer;
+  }
 `;
 
+export const trackPlayLike = styled(btnIcon)`
+  padding: 5px;
+`;
+export const trackPlayDislike = styled(btnIcon)`
+  padding: 5px;
+  margin-left: 28.5px;
+`;
 
-export const trackPlayLikeSvg = styled.svg `
+export const trackPlayLikeSvg = styled.svg`
   width: 14px;
   height: 12px;
   fill: transparent;
   stroke: #696969;
 `;
- export const trackPlayDislikeSvg = styled.svg `
-    width: 14.34px;
-    height: 13px;
-    fill: transparent;
-    stroke: #696969;
-  `;
+export const trackPlayDislikeSvg = styled.svg`
+  width: 14.34px;
+  height: 13px;
+  fill: transparent;
+  stroke: #696969;
+`;
 
-
-export const volumeContent = styled.div `
+export const volumeContent = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -243,17 +242,17 @@ export const volumeImage = styled.div`
   margin-right: 17px;
 `;
 
-export const volumeSvg = styled.svg `
+export const volumeSvg = styled.svg`
   width: 13px;
   height: 18px;
   fill: transparent;
 `;
 
-export const volumeProgress = styled.div `
+export const volumeProgress = styled.div`
   width: 109px;
   cursor: pointer;
-`
-export const volumeProgressLine = styled.input `
+`;
+export const volumeProgressLine = styled.input`
   width: 109px;
   cursor: pointer;
-`
+`;
