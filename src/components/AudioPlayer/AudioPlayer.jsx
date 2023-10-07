@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import * as S from "./AudioPlayer.styles";
 import { SkeletonPlayBar } from "../TrackListItem/Tracks.style";
 import { AudioPlayerIcons } from "../AdioPlayerIcons/AudioPlayerIcons";
+import { AudioVolume } from "../AudioVolume/AudioVolume";
 
 export function AudioPlayer({ isLoading, currentTrack }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -10,23 +11,22 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   console.log(audioRef);
 
   const handleStart = () => {
-    audioRef.current.play()
-    setIsPlaying(true)
-  }
+    audioRef.current.play();
+    setIsPlaying(true);
+  };
   const handleStop = () => {
-    audioRef.current.pause()
-    setIsPlaying(false)
-  }
-  const togglePlay = isPlaying ? handleStop : handleStart
+    audioRef.current.pause();
+    setIsPlaying(false);
+  };
+  const togglePlay = isPlaying ? handleStop : handleStart;
 
   useEffect(() => {
-      handleStart()
-  }, [currentTrack])
-
+    handleStart();
+  }, [currentTrack]);
 
   return (
     <S.bar>
-      <audio src={currentTrack.track_file} ref={audioRef}/>
+      <audio src={currentTrack.track_file} ref={audioRef} />
       <S.barContent>
         <S.barPlayerProgress />
         <S.barPlayerBlock>
@@ -98,23 +98,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
               </S.trackPlayLikeDis>
             </S.playerTrackPlay>
           </S.barPlayer>
-          <S.barVolumeBlock>
-            <S.volumeContent>
-              <S.volumeImage>
-                <S.volumeSvg alt="volume">
-                  <use xlinkHref="img/icon/sprite.svg#icon-volume" />
-                </S.volumeSvg>
-              </S.volumeImage>
-              <S.volumeProgress>
-                <S.volumeProgressLine
-                  $style="input"
-                  className="volume__progress-line _btn"
-                  type="range"
-                  name="range"
-                />
-              </S.volumeProgress>
-            </S.volumeContent>
-          </S.barVolumeBlock>
+          <AudioVolume />
         </S.barPlayerBlock>
       </S.barContent>
     </S.bar>
