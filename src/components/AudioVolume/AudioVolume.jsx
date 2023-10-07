@@ -1,6 +1,16 @@
+/* eslint-disable no-param-reassign */
+import { useState, useEffect } from "react";
 import * as S from "./AudioVolume.style";
 
-export function AudioVolume() {
+export function AudioVolume({ audioRef }) {
+  const [volume, setVolume] = useState(50);
+  useEffect(() => {
+    if (audioRef) {
+      audioRef.current.volume = volume / 100;
+      console.log(audioRef.current.volume);
+    }
+  }, [volume, audioRef]);
+
   return (
     <S.barVolumeBlock>
       <S.volumeContent>
@@ -12,9 +22,13 @@ export function AudioVolume() {
         <S.volumeProgress>
           <S.volumeProgressLine
             $style="input"
-            className="volume__progress-line _btn"
+            // className="volume__progress-line _btn"
+            // name="range"
             type="range"
-            name="range"
+            min={0}
+            max={100}
+            value={volume}
+            onChange={(e) => setVolume(e.target.value)}
           />
         </S.volumeProgress>
       </S.volumeContent>

@@ -2,7 +2,7 @@
 import { useRef, useState, useEffect } from "react";
 import * as S from "./AudioPlayer.styles";
 import { SkeletonPlayBar } from "../TrackListItem/Tracks.style";
-import { AudioPlayerIcons } from "../AdioPlayerIcons/AudioPlayerIcons";
+import { AudioPlayerIcons } from "../AudioPlayerIcons/AudioPlayerIcons";
 import { AudioVolume } from "../AudioVolume/AudioVolume";
 
 export function AudioPlayer({ isLoading, currentTrack }) {
@@ -98,7 +98,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
               </S.trackPlayLikeDis>
             </S.playerTrackPlay>
           </S.barPlayer>
-          <AudioVolume />
+          <AudioVolume audioRef={audioRef} />
         </S.barPlayerBlock>
       </S.barContent>
     </S.bar>
