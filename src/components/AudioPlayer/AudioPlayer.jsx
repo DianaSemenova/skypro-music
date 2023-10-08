@@ -28,11 +28,18 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   }, [currentTrack]);
 
   const onLoadedMetadata = () => {
-    setDuration(audioRef.current.duration)
-  }
+    setDuration(audioRef.current.duration);
+  };
   const onTimeUpdate = () => {
-    setTimeProgress(audioRef.current.currentTime)
-  }
+    setTimeProgress(audioRef.current.currentTime);
+  };
+
+  const [repeatTrack, setRepeatTrack] = useState(false);
+
+  const toggleTrackRepeat = () => {
+    audioRef.current.loop = !repeatTrack;
+    setRepeatTrack(!repeatTrack);
+  };
 
   return (
     <S.bar>
@@ -48,7 +55,6 @@ export function AudioPlayer({ isLoading, currentTrack }) {
           timeProgress={timeProgress}
           audioRef={audioRef}
         />
-        {/* <S.barPlayerProgress /> */}
         <S.barPlayerBlock>
           <S.barPlayer>
             <S.playerControls>
@@ -68,7 +74,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
                   alert("Еще не реализовано");
                 }}
               />
-              <AudioPlayerIcons alt="repeat" />
+              <AudioPlayerIcons alt="repeat" click={toggleTrackRepeat} repeatTrack={repeatTrack} />
               <AudioPlayerIcons
                 alt="shuffle"
                 click={() => {
