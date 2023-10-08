@@ -4,9 +4,12 @@ import * as S from "./AudioPlayer.styles";
 import { SkeletonPlayBar } from "../TrackListItem/Tracks.style";
 import { AudioPlayerIcons } from "../AudioPlayerIcons/AudioPlayerIcons";
 import { AudioVolume } from "../AudioVolume/AudioVolume";
+import { BarPlayerProgress } from "../AudioPlayerProgress/AudioPlayerProgress";
 
 export function AudioPlayer({ isLoading, currentTrack }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [timeProgress, setTimeProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
   console.log(audioRef);
 
@@ -24,11 +27,28 @@ export function AudioPlayer({ isLoading, currentTrack }) {
     handleStart();
   }, [currentTrack]);
 
+  const onLoadedMetadata = () => {
+    setDuration(audioRef.current.duration)
+  }
+  const onTimeUpdate = () => {
+    setTimeProgress(audioRef.current.currentTime)
+  }
+
   return (
     <S.bar>
-      <audio src={currentTrack.track_file} ref={audioRef} />
+      <audio
+        src={currentTrack.track_file}
+        ref={audioRef}
+        onTimeUpdate={onTimeUpdate}
+        onLoadedMetadata={onLoadedMetadata}
+      />
       <S.barContent>
-        <S.barPlayerProgress />
+        <BarPlayerProgress
+          duration={duration}
+          timeProgress={timeProgress}
+          audioRef={audioRef}
+        />
+        {/* <S.barPlayerProgress /> */}
         <S.barPlayerBlock>
           <S.barPlayer>
             <S.playerControls>

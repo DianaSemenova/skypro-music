@@ -39,10 +39,13 @@ export const volumeSvg = styled.svg`
 `;
 
 export const volumeProgress = styled.div`
+  display: flex;
   width: 109px;
   cursor: pointer;
 `;
 export const volumeProgressLine = styled.input`
   width: 109px;
   cursor: pointer;
+  outline: none;
+  height: 2px;
 `;
