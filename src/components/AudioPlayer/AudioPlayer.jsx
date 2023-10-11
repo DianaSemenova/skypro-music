@@ -25,6 +25,9 @@ export function AudioPlayer({ isLoading, currentTrack }) {
 
   useEffect(() => {
     handleStart();
+    audioRef.current.onended = () => {
+      setIsPlaying(false);
+    };
   }, [currentTrack]);
 
   const onLoadedMetadata = () => {
@@ -74,7 +77,11 @@ export function AudioPlayer({ isLoading, currentTrack }) {
                   alert("Еще не реализовано");
                 }}
               />
-              <AudioPlayerIcons alt="repeat" click={toggleTrackRepeat} repeatTrack={repeatTrack} />
+              <AudioPlayerIcons
+                alt="repeat"
+                click={toggleTrackRepeat}
+                repeatTrack={repeatTrack}
+              />
               <AudioPlayerIcons
                 alt="shuffle"
                 click={() => {
