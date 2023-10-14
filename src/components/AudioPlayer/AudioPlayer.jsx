@@ -11,7 +11,6 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
-  console.log(audioRef);
 
   const handleStart = () => {
     audioRef.current.play();
