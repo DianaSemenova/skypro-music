@@ -9,22 +9,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 export function AppRoutes({ setUser, user }) {
   return (
     <Routes>
-      {/* <Route
-        path="/signIn"
-        element={<SignIn onAuthButtonClick={onAuthButtonClick} />}
-      />
-      <Route path="/signUp" element={<SignUp />} /> */}
-      <Route
-        path="/auth"
-        element={
-          <AuthPage
-          //   isLoginMode={isLoginMode}
-            // setIsLoginMode={setIsLoginMode}
-            setUser={setUser}
-          />
-        }
-      />
-   
+      <Route path="/auth" element={<AuthPage setUser={setUser} />} />
 
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
         <Route path="/" element={<Main />} />
