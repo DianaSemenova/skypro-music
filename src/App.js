@@ -7,8 +7,13 @@ function App() {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    window.location.href = "/auth";
+  };
   return (
-    <UserContext.Provider value={{ user }}>
+    <UserContext.Provider value={{ user, handleLogout }}>
       <AppRoutes user={user} setUser={setUser} />
     </UserContext.Provider>
   );

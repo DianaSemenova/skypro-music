@@ -17,11 +17,11 @@ export function Sidebar({ isLoading, loadingTracksError }) {
     </S.SidebarItem>
   ));
 
-  const { user } = useContext(UserContext);
-  const handleLogout = () => {
-    window.location.href = "/auth";
-    localStorage.removeItem("user");
-  };
+  const { user, handleLogout } = useContext(UserContext);
+  // const handleLogout = () => {
+  //   localStorage.removeItem("user");
+  //   window.location.href = "/auth";
+  // };
 
   return (
     <S.mainSidebar>
