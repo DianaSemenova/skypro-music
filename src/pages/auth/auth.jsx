@@ -18,7 +18,7 @@ export function AuthPage({ setUser }) {
       console.log(email);
       console.log(response.username);
       setUser(response.username);
-      localStorage.setItem("user", JSON.stringify(response.username));
+      localStorage.setItem("user", response.username);
       setOffButton(true);
       window.location.href = "/";
     } catch (currentError) {

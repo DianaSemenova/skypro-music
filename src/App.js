@@ -5,7 +5,7 @@ import { UserContext } from "./components/Context/Context";
 
 function App() {
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
+    localStorage.getItem("user") || null
   );
 
   const handleLogout = () => {
