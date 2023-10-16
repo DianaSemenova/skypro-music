@@ -3,18 +3,13 @@ import { Main } from "../../pages/main/main";
 import { NotFound } from "../../pages/notFound/notFound";
 import { Favorites } from "../../pages/favorites/favorites";
 import { Category } from "../../pages/category/category";
-import { SignIn } from "../../pages/login/signIn";
-import { SignUp } from "../../pages/login/signUp";
+import { AuthPage } from "../../pages/auth/auth";
 import { ProtectedRoute } from "./ProtectedRoute";
 
-export function AppRoutes({ user, onAuthButtonClick }) {
+export function AppRoutes({ setUser, user }) {
   return (
     <Routes>
-      <Route
-        path="/signIn"
-        element={<SignIn onAuthButtonClick={onAuthButtonClick} />}
-      />
-      <Route path="/signUp" element={<SignUp />} />
+      <Route path="/auth" element={<AuthPage setUser={setUser} />} />
 
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
         <Route path="/" element={<Main />} />
