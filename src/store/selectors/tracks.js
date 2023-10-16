@@ -1,0 +1,1 @@
+export const allTracksSelector = (store) => store.tracks.allTracks;
