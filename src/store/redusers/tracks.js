@@ -7,8 +7,10 @@ import {
 const initialState = {
   allTracks: [],
   currentTrack: null,
+  indexCurrentTrack: null,
   isPlaying: false,
 };
+// const indexCurrentTrack = null;
 
 export default function tracksReducer(state = initialState, action) {
   switch (action.type) {
@@ -21,21 +23,22 @@ export default function tracksReducer(state = initialState, action) {
       };
     }
 
-    case SET_CURRENT_TRACK: {
-      const { track } = action.payload;
-
-      return {
-        ...state,
-        currentTrack: track,
-      };
-    }
-
     case SET_IS_PLAYING: {
       const isPlaying = action.payload;
 
       return {
         ...state,
         isPlaying,
+      };
+    }
+
+    case SET_CURRENT_TRACK: {
+      const { track, indexCurrentTrack } = action.payload;
+
+      return {
+        ...state,
+        currentTrack: track,
+        indexCurrentTrack,
       };
     }
 

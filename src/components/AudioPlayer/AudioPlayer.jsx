@@ -7,8 +7,15 @@ import { SkeletonPlayBar } from "../TrackListItem/Tracks.style";
 import { AudioPlayerIcons } from "../AudioPlayerIcons/AudioPlayerIcons";
 import { AudioVolume } from "../AudioVolume/AudioVolume";
 import { BarPlayerProgress } from "../AudioPlayerProgress/AudioPlayerProgress";
-import { isPlayingSelector } from "../../store/selectors/tracks";
-import { setIsPlaying } from "../../store/actions/creators/tracks";
+import {
+  isPlayingSelector,
+  allTracksSelector,
+  indexCurrentTrackSelector,
+} from "../../store/selectors/tracks";
+import {
+  setIsPlaying,
+  setCurrentTrack,
+} from "../../store/actions/creators/tracks";
 
 export function AudioPlayer({ isLoading, currentTrack }) {
   const isPlaying = useSelector(isPlayingSelector);
@@ -16,6 +23,8 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
   const dispatch = useDispatch();
+  const tracks = useSelector(allTracksSelector);
+  const indexCurrentTrack = useSelector(indexCurrentTrackSelector);
 
   const handleStart = () => {
     audioRef.current.play();
@@ -25,6 +34,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
     audioRef.current.pause();
     dispatch(setIsPlaying(false));
   };
+
   const togglePlay = isPlaying ? handleStop : handleStart;
 
   useEffect(() => {
@@ -47,6 +57,18 @@ export function AudioPlayer({ isLoading, currentTrack }) {
     audioRef.current.loop = !repeatTrack;
     setRepeatTrack(!repeatTrack);
   };
+  const toggleCurrentTrack = (alt) => {
+    if (alt === "next") {
+      const indexNextTrack = indexCurrentTrack + 1;
+      console.log("Next", tracks[indexNextTrack]);
+      return dispatch(setCurrentTrack(tracks[indexNextTrack], indexNextTrack));
+    }
+    if (alt === "prev" && indexCurrentTrack > 0) {
+      const indexPredTrack = indexCurrentTrack - 1;
+      console.log("Prev", tracks[indexPredTrack]);
+      return dispatch(setCurrentTrack(tracks[indexPredTrack], indexPredTrack));
+    }
+  };
 
   return (
     <S.bar>
@@ -68,7 +90,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
               <AudioPlayerIcons
                 alt="prev"
                 click={() => {
-                  alert("Еще не реализовано");
+                  toggleCurrentTrack("prev");
                 }}
               />
               <AudioPlayerIcons
@@ -78,7 +100,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
               <AudioPlayerIcons
                 alt="next"
                 click={() => {
-                  alert("Еще не реализовано");
+                  toggleCurrentTrack("next");
                 }}
               />
               <AudioPlayerIcons

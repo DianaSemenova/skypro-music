@@ -19,14 +19,14 @@ export function Main() {
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
   const tracks = useSelector(allTracksSelector);
-  // const [currentTrack, setCurrentTrack] = useState(null);
   const [loadingTracksError, setLoadingTracksError] = useState(null);
   const currentTrack = useSelector(currentTrackSelector);
 
   const handleCurrentTrack = (track) => {
-    dispatch(setCurrentTrack(track));
+    const indexCurrentTrack = tracks.indexOf(track);
+    dispatch(setCurrentTrack(track, indexCurrentTrack));
     console.log(track);
-    console.log(track.id);
+    console.log("indexCurrentTrack: ", indexCurrentTrack);
   };
 
   useEffect(() => {
