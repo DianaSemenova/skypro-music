@@ -12,6 +12,7 @@ import {
   allTracksSelector,
   indexCurrentTrackSelector,
   shuffledSelector,
+  shuffledAllTracksSelector,
 } from "../../store/selectors/tracks";
 import {
   setIsPlaying,
@@ -24,10 +25,11 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   const dispatch = useDispatch();
   const isPlaying = useSelector(isPlayingSelector);
   const shuffled = useSelector(shuffledSelector);
+  const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
+  const tracks = useSelector(allTracksSelector);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
-  const tracks = useSelector(allTracksSelector);
   const indexCurrentTrack = useSelector(indexCurrentTrackSelector);
 
   const handleStart = () => {
@@ -40,12 +42,13 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   };
 
   const togglePlay = isPlaying ? handleStop : handleStart;
+  const arrayTracksAll = shuffled ? shuffledAllTracks : tracks;
 
   useEffect(() => {
     handleStart();
     audioRef.current.onended = () => {
       dispatch(
-        setNextTrack(tracks[indexCurrentTrack + 1], indexCurrentTrack + 1)
+        setNextTrack(arrayTracksAll[indexCurrentTrack + 1], indexCurrentTrack + 1)
       );
     };
   }, [currentTrack]);
@@ -66,13 +69,13 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   const toggleCurrentTrack = (alt) => {
     if (alt === "next") {
       const indexNextTrack = indexCurrentTrack + 1;
-      console.log("Next", tracks[indexNextTrack]);
-      return dispatch(setNextTrack(tracks[indexNextTrack], indexNextTrack));
+      console.log("Next", arrayTracksAll[indexNextTrack]);
+      return dispatch(setNextTrack(arrayTracksAll[indexNextTrack], indexNextTrack));
     }
     if (alt === "prev" && indexCurrentTrack > 0) {
       const indexPredTrack = indexCurrentTrack - 1;
-      console.log("Prev", tracks[indexPredTrack]);
-      return dispatch(setPrevTrack(tracks[indexPredTrack], indexPredTrack));
+      console.log("Prev", arrayTracksAll[indexPredTrack]);
+      return dispatch(setPrevTrack(arrayTracksAll[indexPredTrack], indexPredTrack));
     }
   };
 
