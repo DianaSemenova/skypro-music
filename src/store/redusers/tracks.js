@@ -2,6 +2,8 @@ import {
   SET_ALL_TRACKS,
   SET_IS_PLAYING,
   SET_CURRENT_TRACK,
+  SET_NEXT_TRACK,
+  SET_PREV_TRACK,
 } from "../actions/types/tracks";
 
 const initialState = {
@@ -39,6 +41,26 @@ export default function tracksReducer(state = initialState, action) {
         ...state,
         currentTrack: track,
         indexCurrentTrack,
+      };
+    }
+
+    case SET_NEXT_TRACK: {
+      const { trackNext, indexNextTrack } = action.payload;
+
+      return {
+        ...state,
+        currentTrack: trackNext,
+        indexCurrentTrack: indexNextTrack,
+      };
+    }
+
+    case SET_PREV_TRACK: {
+      const { trackPrev, indexPrevTrack } = action.payload;
+
+      return {
+        ...state,
+        currentTrack: trackPrev,
+        indexCurrentTrack: indexPrevTrack,
       };
     }
 

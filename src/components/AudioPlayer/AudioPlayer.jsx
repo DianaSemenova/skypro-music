@@ -14,7 +14,8 @@ import {
 } from "../../store/selectors/tracks";
 import {
   setIsPlaying,
-  setCurrentTrack,
+  setNextTrack,
+  setPrevTrack,
 } from "../../store/actions/creators/tracks";
 
 export function AudioPlayer({ isLoading, currentTrack }) {
@@ -40,7 +41,10 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   useEffect(() => {
     handleStart();
     audioRef.current.onended = () => {
-      setIsPlaying(false);
+      // setIsPlaying(false);
+      dispatch(
+        setNextTrack(tracks[indexCurrentTrack + 1], indexCurrentTrack + 1)
+      );
     };
   }, [currentTrack]);
 
@@ -61,12 +65,12 @@ export function AudioPlayer({ isLoading, currentTrack }) {
     if (alt === "next") {
       const indexNextTrack = indexCurrentTrack + 1;
       console.log("Next", tracks[indexNextTrack]);
-      return dispatch(setCurrentTrack(tracks[indexNextTrack], indexNextTrack));
+      return dispatch(setNextTrack(tracks[indexNextTrack], indexNextTrack));
     }
     if (alt === "prev" && indexCurrentTrack > 0) {
       const indexPredTrack = indexCurrentTrack - 1;
       console.log("Prev", tracks[indexPredTrack]);
-      return dispatch(setCurrentTrack(tracks[indexPredTrack], indexPredTrack));
+      return dispatch(setPrevTrack(tracks[indexPredTrack], indexPredTrack));
     }
   };
 
