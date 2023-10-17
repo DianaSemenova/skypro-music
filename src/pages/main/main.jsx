@@ -6,19 +6,28 @@ import { NavMenu } from "../../components/NavMenu/NavMenu";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { TrackList } from "../../components/TrackList/TrackList";
 import { getTracksAll } from "../../api/Api";
+// eslint-disable-next-line import/no-duplicates
 import { setAllTracks } from "../../store/actions/creators/tracks";
-import { allTracksSelector } from "../../store/selectors/tracks";
+import {
+  allTracksSelector,
+  currentTrackSelector,
+} from "../../store/selectors/tracks";
+// eslint-disable-next-line import/no-duplicates
+import { setCurrentTrack } from "../../store/actions/creators/tracks";
 
 export function Main() {
-  const [isLoading, setLoading] = useState(false);
-  // const [tracks, setTracks] = useState([]);
-  const tracks = useSelector(allTracksSelector);
-  console.log("trackState",tracks);
-  const [currentTrack, setCurrentTrack] = useState(null);
-  const handleCurrentTrack = (track) => setCurrentTrack(track);
-  console.log(currentTrack);
-  const [loadingTracksError, setLoadingTracksError] = useState(null);
   const dispatch = useDispatch();
+  const [isLoading, setLoading] = useState(false);
+  const tracks = useSelector(allTracksSelector);
+  // const [currentTrack, setCurrentTrack] = useState(null);
+  const [loadingTracksError, setLoadingTracksError] = useState(null);
+  const currentTrack = useSelector(currentTrackSelector);
+
+  const handleCurrentTrack = (track) => {
+    dispatch(setCurrentTrack(track));
+    console.log(track);
+    console.log(track.id);
+  };
 
   useEffect(() => {
     if (!isLoading) {
@@ -33,7 +42,6 @@ export function Main() {
   useEffect(() => {
     getTracksAll()
       .then((track) => {
-        console.log("trackApi",track);
         dispatch(setAllTracks(track));
       })
       .catch((error) => {

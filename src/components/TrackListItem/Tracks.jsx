@@ -1,7 +1,7 @@
 import * as S from "./Tracks.style";
 
 export function Tracks({ isLoading, tracks, handleCurrentTrack }) {
-  const trackItems = tracks.map((track) => (
+    const trackItems = tracks.map((track) => (
     <S.playlistItem key={track.id} onClick={() => handleCurrentTrack(track)}>
       <S.playlistTrack>
         <S.trackTitle>

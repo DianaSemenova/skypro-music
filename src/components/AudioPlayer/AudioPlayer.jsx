@@ -1,24 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/media-has-caption */
 import { useRef, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import * as S from "./AudioPlayer.styles";
 import { SkeletonPlayBar } from "../TrackListItem/Tracks.style";
 import { AudioPlayerIcons } from "../AudioPlayerIcons/AudioPlayerIcons";
 import { AudioVolume } from "../AudioVolume/AudioVolume";
 import { BarPlayerProgress } from "../AudioPlayerProgress/AudioPlayerProgress";
+import { isPlayingSelector } from "../../store/selectors/tracks";
+import { setIsPlaying } from "../../store/actions/creators/tracks";
 
 export function AudioPlayer({ isLoading, currentTrack }) {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const isPlaying = useSelector(isPlayingSelector);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
+  const dispatch = useDispatch();
 
   const handleStart = () => {
     audioRef.current.play();
-    setIsPlaying(true);
+    dispatch(setIsPlaying(true));
   };
   const handleStop = () => {
     audioRef.current.pause();
-    setIsPlaying(false);
+    dispatch(setIsPlaying(false));
   };
   const togglePlay = isPlaying ? handleStop : handleStart;
 

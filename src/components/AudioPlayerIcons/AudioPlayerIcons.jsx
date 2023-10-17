@@ -1,13 +1,10 @@
-import { useState } from "react";
 import * as S from "./AudioPlayerIcons.styles";
 
 export function AudioPlayerIcons(props) {
-  const [isActive, setIsActive] = useState(false);
   return (
     <S.playerBtn
       $style={props.alt}
       onClick={() => {
-        setIsActive(!isActive);
         props.click();
       }}
     >
