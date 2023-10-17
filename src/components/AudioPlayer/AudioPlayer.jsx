@@ -11,19 +11,22 @@ import {
   isPlayingSelector,
   allTracksSelector,
   indexCurrentTrackSelector,
+  shuffledSelector,
 } from "../../store/selectors/tracks";
 import {
   setIsPlaying,
   setNextTrack,
   setPrevTrack,
+  toggleShuffleTracks,
 } from "../../store/actions/creators/tracks";
 
 export function AudioPlayer({ isLoading, currentTrack }) {
+  const dispatch = useDispatch();
   const isPlaying = useSelector(isPlayingSelector);
+  const shuffled = useSelector(shuffledSelector);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
-  const dispatch = useDispatch();
   const tracks = useSelector(allTracksSelector);
   const indexCurrentTrack = useSelector(indexCurrentTrackSelector);
 
@@ -41,7 +44,6 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   useEffect(() => {
     handleStart();
     audioRef.current.onended = () => {
-      // setIsPlaying(false);
       dispatch(
         setNextTrack(tracks[indexCurrentTrack + 1], indexCurrentTrack + 1)
       );
@@ -107,15 +109,11 @@ export function AudioPlayer({ isLoading, currentTrack }) {
                   toggleCurrentTrack("next");
                 }}
               />
-              <AudioPlayerIcons
-                alt="repeat"
-                click={toggleTrackRepeat}
-                repeatTrack={repeatTrack}
-              />
+              <AudioPlayerIcons alt="repeat" click={toggleTrackRepeat} />
               <AudioPlayerIcons
                 alt="shuffle"
                 click={() => {
-                  alert("Еще не реализовано");
+                  dispatch(toggleShuffleTracks(!shuffled));
                 }}
               />
             </S.playerControls>

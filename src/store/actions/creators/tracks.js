@@ -3,7 +3,8 @@ import {
   SET_IS_PLAYING,
   SET_CURRENT_TRACK,
   SET_NEXT_TRACK,
-  SET_PREV_TRACK
+  SET_PREV_TRACK,
+  TOGGLE_SHUFFLE_TRACKS,
 } from "../types/tracks";
 
 export const setAllTracks = (allTracks) => ({
@@ -27,4 +28,9 @@ export const setNextTrack = (trackNext, indexNextTrack) => ({
 export const setPrevTrack = (trackPrev, indexPrevTrack) => ({
   type: SET_PREV_TRACK,
   payload: { trackPrev, indexPrevTrack },
+});
+
+export const toggleShuffleTracks = (shuffled) => ({
+  type: TOGGLE_SHUFFLE_TRACKS,
+  payload: { shuffled },
 });

@@ -4,6 +4,7 @@ import {
   SET_CURRENT_TRACK,
   SET_NEXT_TRACK,
   SET_PREV_TRACK,
+  TOGGLE_SHUFFLE_TRACKS,
 } from "../actions/types/tracks";
 
 const initialState = {
@@ -11,8 +12,15 @@ const initialState = {
   currentTrack: null,
   indexCurrentTrack: null,
   isPlaying: false,
+  shuffled: false,
+  shuffledAllTracks: [],
 };
-// const indexCurrentTrack = null;
+
+const getShuffledAllTracks = (array) => {
+  const arrayTracks = new Array(...array);
+  //  const arrayTracks = array.slice();
+  return arrayTracks.sort(() => Math.random() - 0.5);
+};
 
 export default function tracksReducer(state = initialState, action) {
   switch (action.type) {
@@ -61,6 +69,17 @@ export default function tracksReducer(state = initialState, action) {
         ...state,
         currentTrack: trackPrev,
         indexCurrentTrack: indexPrevTrack,
+      };
+    }
+
+    case TOGGLE_SHUFFLE_TRACKS: {
+      const { shuffled } = action.payload;
+      if (shuffled)
+        console.log("Shuffled", getShuffledAllTracks(state.allTracks));
+      return {
+        ...state,
+        shuffled,
+        shuffledAllTracks: shuffled && getShuffledAllTracks(state.allTracks),
       };
     }
 
