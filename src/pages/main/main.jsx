@@ -11,6 +11,8 @@ import { setAllTracks } from "../../store/actions/creators/tracks";
 import {
   allTracksSelector,
   currentTrackSelector,
+  shuffledAllTracksSelector,
+  shuffledSelector,
 } from "../../store/selectors/tracks";
 // eslint-disable-next-line import/no-duplicates
 import { setCurrentTrack } from "../../store/actions/creators/tracks";
@@ -18,12 +20,15 @@ import { setCurrentTrack } from "../../store/actions/creators/tracks";
 export function Main() {
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
+  const shuffled = useSelector(shuffledSelector);
   const tracks = useSelector(allTracksSelector);
+  const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
+  const arrayTracksAll = shuffled ? shuffledAllTracks : tracks;
   const [loadingTracksError, setLoadingTracksError] = useState(null);
   const currentTrack = useSelector(currentTrackSelector);
 
   const handleCurrentTrack = (track) => {
-    const indexCurrentTrack = tracks.indexOf(track);
+    const indexCurrentTrack = arrayTracksAll.indexOf(track);
     dispatch(setCurrentTrack(track, indexCurrentTrack));
     console.log(track);
     console.log("indexCurrentTrack: ", indexCurrentTrack);
