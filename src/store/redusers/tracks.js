@@ -74,8 +74,10 @@ export default function tracksReducer(state = initialState, action) {
 
     case TOGGLE_SHUFFLE_TRACKS: {
       const { shuffled } = action.payload;
-      if (shuffled)
+      if (shuffled) {
         console.log("Shuffled", getShuffledAllTracks(state.allTracks));
+      }
+
       return {
         ...state,
         shuffled,

@@ -47,9 +47,15 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   useEffect(() => {
     handleStart();
     audioRef.current.onended = () => {
-      dispatch(
-        setNextTrack(arrayTracksAll[indexCurrentTrack + 1], indexCurrentTrack + 1)
-      );
+      if (indexCurrentTrack < (arrayTracksAll.length-1)) {
+        dispatch(
+          setNextTrack(
+            arrayTracksAll[indexCurrentTrack + 1],
+            indexCurrentTrack + 1
+          )
+        );
+      }
+      dispatch(setIsPlaying(false));
     };
   }, [currentTrack]);
 
@@ -67,15 +73,19 @@ export function AudioPlayer({ isLoading, currentTrack }) {
     setRepeatTrack(!repeatTrack);
   };
   const toggleCurrentTrack = (alt) => {
-    if (alt === "next") {
+    if (alt === "next" && indexCurrentTrack < (arrayTracksAll.length - 1)) {
       const indexNextTrack = indexCurrentTrack + 1;
       console.log("Next", arrayTracksAll[indexNextTrack]);
-      return dispatch(setNextTrack(arrayTracksAll[indexNextTrack], indexNextTrack));
+      return dispatch(
+        setNextTrack(arrayTracksAll[indexNextTrack], indexNextTrack)
+      );
     }
     if (alt === "prev" && indexCurrentTrack > 0) {
       const indexPredTrack = indexCurrentTrack - 1;
       console.log("Prev", arrayTracksAll[indexPredTrack]);
-      return dispatch(setPrevTrack(arrayTracksAll[indexPredTrack], indexPredTrack));
+      return dispatch(
+        setPrevTrack(arrayTracksAll[indexPredTrack], indexPredTrack)
+      );
     }
   };
 
