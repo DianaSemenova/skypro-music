@@ -19,7 +19,7 @@ import {
   setNextTrack,
   setPrevTrack,
   toggleShuffleTracks,
-} from "../../store/actions/creators/tracks";
+} from "../../store/slices/tracksSlice";
 
 export function AudioPlayer({ isLoading, currentTrack }) {
   const dispatch = useDispatch();

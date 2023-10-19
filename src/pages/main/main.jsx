@@ -7,15 +7,13 @@ import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { TrackList } from "../../components/TrackList/TrackList";
 import { getTracksAll } from "../../api/Api";
 // eslint-disable-next-line import/no-duplicates
-import { setAllTracks } from "../../store/actions/creators/tracks";
+import { setAllTracks, setCurrentTrack } from "../../store/slices/tracksSlice"
 import {
   allTracksSelector,
   currentTrackSelector,
   shuffledAllTracksSelector,
   shuffledSelector,
 } from "../../store/selectors/tracks";
-// eslint-disable-next-line import/no-duplicates
-import { setCurrentTrack } from "../../store/actions/creators/tracks";
 
 export function Main() {
   const dispatch = useDispatch();
