@@ -75,16 +75,18 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   const toggleCurrentTrack = (alt) => {
     if (alt === "next" && indexCurrentTrack < arrayTracksAll.length - 1) {
       const indexNextTrack = arrayTracksAll.indexOf(currentTrack) + 1;
+      const trackNext = arrayTracksAll [indexNextTrack]
       console.log("Next", arrayTracksAll[indexNextTrack]);
       return dispatch(
-        setNextTrack(arrayTracksAll[indexNextTrack], indexNextTrack)
+        setNextTrack({trackNext, indexNextTrack})
       );
     }
     if (alt === "prev" && indexCurrentTrack > 0) {
       const indexPredTrack = arrayTracksAll.indexOf(currentTrack) - 1;
-      console.log("Prev", arrayTracksAll[indexPredTrack]);
+      const trackPred = arrayTracksAll [indexPredTrack]
+      console.log("Pred", arrayTracksAll[indexPredTrack]);
       return dispatch(
-        setPrevTrack(arrayTracksAll[indexPredTrack], indexPredTrack)
+        setPrevTrack({trackPred, indexPredTrack})
       );
     }
   };

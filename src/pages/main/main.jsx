@@ -7,7 +7,7 @@ import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { TrackList } from "../../components/TrackList/TrackList";
 import { getTracksAll } from "../../api/Api";
 // eslint-disable-next-line import/no-duplicates
-import { setAllTracks, setCurrentTrack } from "../../store/slices/tracksSlice"
+import { setAllTracks, setCurrentTrack } from "../../store/slices/tracksSlice";
 import {
   allTracksSelector,
   currentTrackSelector,
@@ -27,7 +27,7 @@ export function Main() {
 
   const handleCurrentTrack = (track) => {
     const indexCurrentTrack = arrayTracksAll.indexOf(track);
-    dispatch(setCurrentTrack(track, indexCurrentTrack));
+    dispatch(setCurrentTrack({ track, indexCurrentTrack }));
     console.log(track);
     console.log("indexCurrentTrack: ", indexCurrentTrack);
   };
