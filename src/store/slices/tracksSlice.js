@@ -7,6 +7,7 @@ const initialState = {
   isPlaying: false,
   shuffled: false,
   shuffledAllTracks: [],
+  favouritesTracks: [],
 };
 
 const getShuffledAllTracks = (array) => {

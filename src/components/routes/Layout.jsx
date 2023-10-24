@@ -1,30 +1,27 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Outlet } from "react-router";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import * as S from "../../pages/main/main.style";
 import { NavMenu } from "../NavMenu/NavMenu";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { AudioPlayer } from "../AudioPlayer/AudioPlayer";
-import { getTracksAll } from "../../api/Api";
 import { setAllTracks } from "../../store/slices/tracksSlice";
 import { currentTrackSelector } from "../../store/selectors/tracks";
 import CenterBlockSearch from "../CenterBlockSearch/CenterBlockSearch";
+import { useGetTracksAllQuery } from "../../servicesQuery/tracksApi";
 
 export default function Layout({ isLoading }) {
   const dispatch = useDispatch();
-  const [loadingTracksError, setLoadingTracksError] = useState(null);
   const currentTrack = useSelector(currentTrackSelector);
+  const { data, isError } = useGetTracksAllQuery();
 
   useEffect(() => {
-    getTracksAll()
-      .then((track) => {
-        dispatch(setAllTracks(track));
-      })
-      .catch((error) => {
-        setLoadingTracksError(error.message);
-      });
-  }, []);
+    if (data) {
+      console.log(data);
+      dispatch(setAllTracks(data));
+    }
+  }, [data]);
 
   return (
     <div className="App">
@@ -36,12 +33,8 @@ export default function Layout({ isLoading }) {
               <CenterBlockSearch />
 
               <Outlet />
-              
             </S.MainCenterBlock>
-            <Sidebar
-              isLoading={isLoading}
-              loadingTracksError={loadingTracksError}
-            />
+            <Sidebar isLoading={isLoading} loadingTracksError={isError} />
           </S.main>
           {currentTrack && (
             <AudioPlayer isLoading={isLoading} currentTrack={currentTrack} />

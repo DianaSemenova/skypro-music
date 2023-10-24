@@ -49,10 +49,10 @@ export function AudioPlayer({ isLoading, currentTrack }) {
     audioRef.current.onended = () => {
       if (indexCurrentTrack < arrayTracksAll.length - 1) {
         dispatch(
-          setNextTrack(
-            arrayTracksAll[indexCurrentTrack + 1],
-            indexCurrentTrack + 1
-          )
+          setNextTrack({
+            trackNext: arrayTracksAll[arrayTracksAll.indexOf(currentTrack) + 1],
+            indexNextTrack: arrayTracksAll.indexOf(currentTrack) + 1,
+          })
         );
       }
       dispatch(setIsPlaying(false));
