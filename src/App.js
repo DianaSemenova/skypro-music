@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { AppRoutes } from "./components/routes/routes";
@@ -8,6 +8,17 @@ import { store } from "./store/store";
 
 function App() {
   const [user, setUser] = useState(localStorage.getItem("user") || null);
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const timer = setTimeout(() => {
+        setLoading(true);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -17,7 +28,11 @@ function App() {
     <UserContext.Provider value={{ user, handleLogout }}>
       <Provider store={store}>
         <BrowserRouter>
-          <AppRoutes user={user} setUser={setUser} />
+          <AppRoutes
+            user={user}
+            setUser={setUser}
+            isLoading={isLoading}
+          />
         </BrowserRouter>
       </Provider>
     </UserContext.Provider>

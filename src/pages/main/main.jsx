@@ -1,29 +1,22 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as S from "./main.style";
-import { AudioPlayer } from "../../components/AudioPlayer/AudioPlayer";
-import { NavMenu } from "../../components/NavMenu/NavMenu";
-import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { TrackList } from "../../components/TrackList/TrackList";
 import { getTracksAll } from "../../api/Api";
-// eslint-disable-next-line import/no-duplicates
-import { setAllTracks, setCurrentTrack } from "../../store/slices/tracksSlice";
+import { setCurrentTrack, setAllTracks } from "../../store/slices/tracksSlice";
+
 import {
   allTracksSelector,
-  currentTrackSelector,
   shuffledAllTracksSelector,
   shuffledSelector,
 } from "../../store/selectors/tracks";
 
-export function Main() {
+export function Main({ isLoading }) {
   const dispatch = useDispatch();
-  const [isLoading, setLoading] = useState(false);
   const shuffled = useSelector(shuffledSelector);
   const tracks = useSelector(allTracksSelector);
   const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
   const arrayTracksAll = shuffled ? shuffledAllTracks : tracks;
   const [loadingTracksError, setLoadingTracksError] = useState(null);
-  const currentTrack = useSelector(currentTrackSelector);
 
   const handleCurrentTrack = (track) => {
     const indexCurrentTrack = arrayTracksAll.indexOf(track);
@@ -32,15 +25,6 @@ export function Main() {
     console.log("indexCurrentTrack: ", indexCurrentTrack);
   };
 
-  useEffect(() => {
-    if (!isLoading) {
-      const timer = setTimeout(() => {
-        setLoading(true);
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isLoading]);
 
   useEffect(() => {
     getTracksAll()
@@ -53,28 +37,11 @@ export function Main() {
   }, []);
 
   return (
-    <div className="App">
-      <S.wrapper>
-        <S.container>
-          <S.main>
-            <NavMenu />
-            <TrackList
-              isLoading={isLoading}
-              tracks={tracks}
-              handleCurrentTrack={handleCurrentTrack}
-              loadingTracksError={loadingTracksError}
-            />
-            <Sidebar
-              isLoading={isLoading}
-              loadingTracksError={loadingTracksError}
-            />
-          </S.main>
-          {currentTrack && (
-            <AudioPlayer isLoading={isLoading} currentTrack={currentTrack} />
-          )}
-          <footer className="footer" />
-        </S.container>
-      </S.wrapper>
-    </div>
+    <TrackList
+      isLoading={isLoading}
+      tracks={tracks}
+      handleCurrentTrack={handleCurrentTrack}
+      loadingTracksError={loadingTracksError}
+    />
   );
 }

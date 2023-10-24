@@ -8,7 +8,6 @@ export function Favourites() {
         <S.main>
           <h1>FavouritesPages</h1>
         </S.main>
-        {/* <AudioPlayer /> */}
         <footer className="footer" />
       </S.container>
     </S.wrapper>

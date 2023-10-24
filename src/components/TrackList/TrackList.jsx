@@ -10,13 +10,7 @@ export function TrackList({
   loadingTracksError,
 }) {
   return (
-    <S.MainCenterBlock>
-      <S.CenterBlockSearch>
-        <S.SearchSvg>
-          <use xlinkHref="img/icon/sprite.svg#icon-search" />
-        </S.SearchSvg>
-        <S.SearchText type="search" placeholder="Поиск" name="search" />
-      </S.CenterBlockSearch>
+    <>
       <S.centerblockH2 className="centerblock__h2">Треки</S.centerblockH2>
       <TrackListFilter />
       <S.centerblockContent>
@@ -31,6 +25,6 @@ export function TrackList({
           />
         )}
       </S.centerblockContent>
-    </S.MainCenterBlock>
+    </>
   );
 }
