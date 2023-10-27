@@ -2,14 +2,9 @@ import * as S from "./TrackList.style";
 import { Tracks } from "../TrackListItem/Tracks";
 import { TrackListTitle } from "../TracklistTitle/TrackListTitle";
 import { TrackListFilter } from "../TrackListFilter/TrackListFilter";
-import { useGetTracksAllQuery } from "../../servicesQuery/tracksApi";
+import { useGetTracksAllQuery } from "../../servicesQuery/api";
 
-export function TrackList({
-  isLoading,
-  tracks,
-  handleCurrentTrack,
-}) {
-
+export function TrackList({ isLoading, tracks, handleCurrentTrack }) {
   const { isError } = useGetTracksAllQuery();
   return (
     <>

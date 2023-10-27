@@ -1,26 +1,44 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { registrationUserApi, loginUserApi } from "../../api/ApiUsersLogin";
 import * as S from "./auth.style";
+import { useAccessTokenUserMutation } from "../../servicesQuery/api";
+import { setToken } from "../../store/slices/tokenSlice";
 
 export function AuthPage({ setUser }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [offButton, setOffButton] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(false);
+  const [postToken] = useAccessTokenUserMutation();
 
   const handleLogin = async () => {
     try {
       const response = await loginUserApi(email, password);
+
+      await postToken({ email, password })
+        .unwrap()
+        .then((token) => {
+          console.log("token", token);
+          localStorage.setItem("token", token.access);
+          localStorage.setItem("refreshToken", token.refresh);
+          dispatch(
+            setToken({ accessToken: token.access, refreshToken: token.refresh })
+          );
+        });
+
       console.log(email);
       console.log(response.username);
       setUser(response.username);
       localStorage.setItem("user", response.username);
       setOffButton(true);
-      window.location.href = "/";
+      navigate("/");
     } catch (currentError) {
       setError(currentError.message);
     } finally {

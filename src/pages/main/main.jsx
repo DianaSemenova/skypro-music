@@ -24,17 +24,6 @@ export function Main({ isLoading }) {
     console.log("indexCurrentTrack: ", indexCurrentTrack);
   };
 
-  // useEffect(() => {
-  //   getTracksAll()
-  //     .then((track) => {
-  //       dispatch(setAllTracks(track));
-  //     })
-  //     .catch((error) => {
-  //       setLoadingTracksError(error.message);
-  //     });
-   
-  // }, [data]);
-
   return (
     <TrackList
       isLoading={isLoading}

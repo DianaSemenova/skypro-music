@@ -1,7 +1,16 @@
+import { useEffect } from "react";
 import * as S from "../main/main.style";
-// import { AudioPlayer } from "../../components/AudioPlayer/AudioPlayer";
+import { useGetFavouriteTracksAllQuery } from "../../servicesQuery/api";
 
 export function Favourites() {
+  const { data } = useGetFavouriteTracksAllQuery();
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+    }
+  }, [data]);
+
   return (
     <S.wrapper>
       <S.container>

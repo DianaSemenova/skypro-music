@@ -23,6 +23,10 @@ export const trackSlice = createSlice({
       state.allTracks = action.payload;
     },
 
+    setFavouriteTracksAll: (state, action) => {
+      state.favouritesTracks = action.payload;
+    },
+
     setIsPlaying: (state, action) => {
       state.isPlaying = action.payload;
     },
@@ -64,6 +68,7 @@ export const {
   setPrevTrack,
   setIsPlaying,
   toggleShuffleTracks,
+  setFavouriteTracksAll
 } = trackSlice.actions;
 
 export default trackSlice.reducer;
