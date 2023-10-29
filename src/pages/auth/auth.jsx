@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { registrationUserApi, loginUserApi } from "../../api/ApiUsersLogin";
 import * as S from "./auth.style";
-import { useAccessTokenUserMutation } from "../../servicesQuery/api";
+import { useAccessTokenUserMutation } from "../../servicesQuery/token";
 import { setToken } from "../../store/slices/tokenSlice";
 
 export function AuthPage({ setUser }) {
@@ -17,21 +17,25 @@ export function AuthPage({ setUser }) {
   const [offButton, setOffButton] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(false);
   const [postToken] = useAccessTokenUserMutation();
+  // const { refreshToken } = useSelector((store) => store.token);
+
+  const responseToken = async () => {
+    await postToken({ email, password })
+      .unwrap()
+      .then((token) => {
+        console.log("token", token);
+        localStorage.setItem("refreshToken", token.refresh);
+        localStorage.setItem("accessToken", token.access);
+        dispatch(
+          setToken({ accessToken: token.access, refreshToken: token.refresh })
+        );
+      });
+  };
 
   const handleLogin = async () => {
     try {
       const response = await loginUserApi(email, password);
-
-      await postToken({ email, password })
-        .unwrap()
-        .then((token) => {
-          console.log("token", token);
-          localStorage.setItem("token", token.access);
-          localStorage.setItem("refreshToken", token.refresh);
-          dispatch(
-            setToken({ accessToken: token.access, refreshToken: token.refresh })
-          );
-        });
+      responseToken();
 
       console.log(email);
       console.log(response.username);
@@ -52,6 +56,7 @@ export function AuthPage({ setUser }) {
     } else {
       try {
         const response = await registrationUserApi(email, password);
+        responseToken();
         console.log(response);
         setOffButton(true);
         setUser(response.username);

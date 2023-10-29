@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import tracksReducer from "./slices/tracksSlice";
 import tokenReducer from "./slices/tokenSlice";
-import { apiQuery } from "../servicesQuery/api";
+import { tracksQuery } from "../servicesQuery/tracks";
+import { tokenQuery } from "../servicesQuery/token";
 
 export const store = configureStore({
   reducer: {
     tracks: tracksReducer,
     token: tokenReducer,
-    [apiQuery.reducerPath]: apiQuery.reducer,
+    [tracksQuery.reducerPath]: tracksQuery.reducer,
+    [tokenQuery.reducerPath]: tokenQuery.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiQuery.middleware),
+    getDefaultMiddleware().concat(tracksQuery.middleware),
 });

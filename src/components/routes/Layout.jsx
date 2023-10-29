@@ -9,7 +9,7 @@ import { AudioPlayer } from "../AudioPlayer/AudioPlayer";
 import { setAllTracks } from "../../store/slices/tracksSlice";
 import { currentTrackSelector } from "../../store/selectors/tracks";
 import CenterBlockSearch from "../CenterBlockSearch/CenterBlockSearch";
-import { useGetTracksAllQuery } from "../../servicesQuery/api";
+import { useGetTracksAllQuery } from "../../servicesQuery/tracks";
 
 export default function Layout({ isLoading }) {
   const dispatch = useDispatch();

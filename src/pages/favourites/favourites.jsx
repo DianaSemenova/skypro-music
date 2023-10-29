@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import * as S from "../main/main.style";
-import { useGetFavouriteTracksAllQuery } from "../../servicesQuery/api";
+import { useGetFavouriteTracksAllQuery } from "../../servicesQuery/tracks";
 
 export function Favourites() {
   const { data } = useGetFavouriteTracksAllQuery();

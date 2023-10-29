@@ -31,7 +31,7 @@ export async function registrationUserApi(email, password) {
   // .then((data) => data);
 }
 
-export async function loginUserApi(email, password ) {
+export async function loginUserApi(email, password) {
   return fetch("https://skypro-music-api.skyeng.tech/user/login/", {
     method: "POST",
     body: JSON.stringify({
@@ -58,6 +58,7 @@ export async function loginUserApi(email, password ) {
       return response.json().then((errorResponse) => {
         throw new Error(errorResponse.detail);
       });
+      
     }
     return response.json();
   });
