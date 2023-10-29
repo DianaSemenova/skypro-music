@@ -9,7 +9,7 @@ import {
 import { TrackList } from "../../components/TrackList/TrackList";
 import { favouritesTracksSelector } from "../../store/selectors/tracks";
 
-export function Favourites() {
+export function Favourites({ handleCurrentTrack }) {
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetFavouriteTracksAllQuery();
   const favouritesTracks = useSelector(favouritesTracksSelector);
@@ -30,6 +30,7 @@ export function Favourites() {
         tracks={favouritesTracks}
         error={error}
         isLoading={isLoading}
+        handleCurrentTrack={handleCurrentTrack}
       />
       {isLoading && <div>Загрузка...</div>}
       {error && <div>{error}</div>}
