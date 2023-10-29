@@ -10,6 +10,7 @@ export function TrackList({
   tracks,
   handleCurrentTrack,
 }) {
+  const authID = localStorage.getItem("userID");
   return (
     <>
       <S.centerblockH2 className="centerblock__h2">
@@ -21,11 +22,25 @@ export function TrackList({
         {error ? (
           <div>Не удалось загрузить плейлист, попробуйте позже</div>
         ) : (
-          <Tracks
-            isLoading={isLoading}
-            tracks={tracks}
-            handleCurrentTrack={handleCurrentTrack}
-          />
+          <S.contentPlaylist>
+            {tracks &&
+              tracks.map((track) => (
+                <S.playlistItem
+                  key={track.id}
+                  onClick={() => handleCurrentTrack(track)}
+                >
+                  <Tracks
+                    isLoading={isLoading}
+                    track={track}
+                    isLiked={
+                      title === "Мои треки"
+                        ? true
+                        : track.stared_user?.find((user) => user.id === authID)
+                    }
+                  />
+                </S.playlistItem>
+              ))}
+          </S.contentPlaylist>
         )}
       </S.centerblockContent>
     </>

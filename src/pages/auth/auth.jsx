@@ -41,6 +41,7 @@ export function AuthPage({ setUser }) {
       console.log(response.username);
       setUser(response.username);
       localStorage.setItem("user", response.username);
+      localStorage.setItem("userID", response.id);
       setOffButton(true);
       navigate("/");
     } catch (currentError) {

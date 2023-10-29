@@ -144,24 +144,24 @@ export function AudioPlayer({ isLoading, currentTrack }) {
                   </S.trackPlaySvg>
                 </S.trackPlayImage>
 
-                {isLoading ? (
+                {!isLoading ? (
                   <S.trackPlayAuthor>
                     <S.trackPlayAuthorLink href="http://">
                       {currentTrack.name}
                     </S.trackPlayAuthorLink>
                   </S.trackPlayAuthor>
                 ) : (
-                  <SkeletonPlayBar> </SkeletonPlayBar>
+                  <SkeletonPlayBar/>
                 )}
 
-                {isLoading ? (
+                {!isLoading ? (
                   <S.trackPlayAlbum>
                     <S.trackPlayAlbumLink href="http://">
                       {currentTrack.author}
                     </S.trackPlayAlbumLink>
                   </S.trackPlayAlbum>
                 ) : (
-                  <SkeletonPlayBar> </SkeletonPlayBar>
+                  <SkeletonPlayBar/>
                 )}
               </S.trackPlayContain>
               <S.trackPlayLikeDis>

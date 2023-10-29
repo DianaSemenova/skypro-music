@@ -18,3 +18,20 @@ export const centerblockContent = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
 `;
+
+export const contentPlaylist = styled.ul`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: auto;
+`;
+
+export const playlistItem = styled.li`
+  width: 100%;
+  display: block;
+  margin-bottom: 12px;
+`;

@@ -35,6 +35,15 @@ export const trackSlice = createSlice({
 
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
+
+      if (!state.shuffled) {
+        if (state.currentPage === "Main") {
+          state.currentPlaylist = state.allTracks;
+        }
+        if (state.currentPage === "Favourites") {
+          state.currentPlaylist = state.favouritesTracks;
+        }
+      }
     },
 
     setCurrentTrack: (state, action) => {
@@ -63,15 +72,6 @@ export const trackSlice = createSlice({
       }
       state.shuffledAllTracks =
         state.shuffled && getShuffledAllTracks(state.currentPlaylist);
-
-      if (!state.shuffled) {
-        if (state.currentPage === "Main") {
-          state.currentPlaylist = state.allTracks;
-        }
-        if (state.currentPage === "Favourites") {
-          state.currentPlaylist = state.favouritesTracks;
-        }
-      }
     },
   },
 });

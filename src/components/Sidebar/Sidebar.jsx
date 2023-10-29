@@ -7,12 +7,12 @@ import { UserContext } from "../Context/Context";
 export function Sidebar({ isLoading, loadingTracksError }) {
   const categoryPlayList = playListArr.map((category) => (
     <S.SidebarItem key={category.id}>
-      {isLoading && !loadingTracksError ? (
+      {!isLoading && !loadingTracksError ? (
         <S.SidebarLink to={`/category/${category.id}`}>
           <S.SidebarImg src={category.img} alt={category.alt} />
         </S.SidebarLink>
       ) : (
-        <SkeletonSidebar> </SkeletonSidebar>
+        <SkeletonSidebar/>
       )}
     </S.SidebarItem>
   ));

@@ -147,7 +147,7 @@ export const trackAlbumLink = styled(Link)`
   color: #696969;
 `;
 
-export const trackTimeSvg = styled.svg`
+export const trackLikeSvg = styled.svg`
   width: 14px;
   height: 12px;
   margin-right: 17px;

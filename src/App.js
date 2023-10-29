@@ -8,12 +8,13 @@ import { store } from "./store/store";
 
 function App() {
   const [user, setUser] = useState(localStorage.getItem("user") || null);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!isLoading) {
+    if (isLoading) {
       const timer = setTimeout(() => {
-        setLoading(true);
+        setLoading(false);
+        console.log("isLoading", isLoading)
       }, 3000);
 
       return () => clearTimeout(timer);
