@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   allTracks: [],
+  currentPage: "",
   currentTrack: null,
   indexCurrentTrack: null,
   isPlaying: false,
@@ -29,6 +30,10 @@ export const trackSlice = createSlice({
 
     setIsPlaying: (state, action) => {
       state.isPlaying = action.payload;
+    },
+
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
     },
 
     setCurrentTrack: (state, action) => {
@@ -68,7 +73,8 @@ export const {
   setPrevTrack,
   setIsPlaying,
   toggleShuffleTracks,
-  setFavouriteTracksAll
+  setFavouriteTracksAll,
+  setCurrentPage,
 } = trackSlice.actions;
 
 export default trackSlice.reducer;

@@ -1,28 +1,48 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import * as S from "../main/main.style";
+import { useDispatch, useSelector } from "react-redux";
+// import * as S from "../main/main.style";
 import { useGetFavouriteTracksAllQuery } from "../../servicesQuery/tracks";
-import { setFavouriteTracksAll } from "../../store/slices/tracksSlice";
+import {
+  setFavouriteTracksAll,
+  setCurrentPage,
+} from "../../store/slices/tracksSlice";
+import { TrackList } from "../../components/TrackList/TrackList";
+import { favouritesTracksSelector } from "../../store/selectors/tracks";
 
 export function Favourites() {
   const dispatch = useDispatch();
-  const { data } = useGetFavouriteTracksAllQuery();
+  const { data, error, isLoading } = useGetFavouriteTracksAllQuery();
+  const favouritesTracks = useSelector(favouritesTracksSelector);
 
   useEffect(() => {
     if (data) {
-      console.log("favoritesTracks", data);
+      console.log("favouritesTracks", data);
       dispatch(setFavouriteTracksAll(data));
+      dispatch(setCurrentPage("Favourites"));
     }
   }, [data]);
 
   return (
-    <S.wrapper>
-      <S.container>
-        <S.main>
-          <h1>FavouritesPages</h1>
-        </S.main>
-        <footer className="footer" />
-      </S.container>
-    </S.wrapper>
+    <>
+      <TrackList
+        title="Мои треки"
+        tracks={favouritesTracks}
+        error={error}
+        isLoading={isLoading}
+      />
+      {isLoading && <div>Загрузка...</div>}
+      {error && <div>{error}</div>}
+    </>
   );
+
+  // return (
+  //   <S.wrapper>
+  //     <S.container>
+  //       <S.main>
+  //         <h1>FavouritesPages</h1>
+  //       </S.main>
+  //       <footer className="footer" />
+  //     </S.container>
+  //   </S.wrapper>
+  // );
 }

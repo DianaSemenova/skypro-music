@@ -1,27 +1,25 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Outlet } from "react-router";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import * as S from "../../pages/main/main.style";
 import { NavMenu } from "../NavMenu/NavMenu";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { AudioPlayer } from "../AudioPlayer/AudioPlayer";
-import { setAllTracks } from "../../store/slices/tracksSlice";
 import { currentTrackSelector } from "../../store/selectors/tracks";
 import CenterBlockSearch from "../CenterBlockSearch/CenterBlockSearch";
 import { useGetTracksAllQuery } from "../../servicesQuery/tracks";
 
 export default function Layout({ isLoading }) {
-  const dispatch = useDispatch();
   const currentTrack = useSelector(currentTrackSelector);
-  const { data, isError } = useGetTracksAllQuery();
+  const { isError } = useGetTracksAllQuery();
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-      dispatch(setAllTracks(data));
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data);
+  //     dispatch(setAllTracks(data));
+  //     dispatch(setCurrentPage("Main"));
+  //   }
+  // }, [data]);
 
   return (
     <div className="App">
