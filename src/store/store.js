@@ -12,5 +12,5 @@ export const store = configureStore({
     [tokenQuery.reducerPath]: tokenQuery.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(tracksQuery.middleware),
+    getDefaultMiddleware().concat(tracksQuery.middleware).concat(tokenQuery.middleware),
 });

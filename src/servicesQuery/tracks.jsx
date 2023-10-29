@@ -5,9 +5,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
     baseUrl: "https://skypro-music-api.skyeng.tech",
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().refreshToken.accessToken;
+      const token = getState().token.accessToken;
 
-      console.log("tokenQuery", token);
+      console.log("accessToken", token);
 
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
@@ -139,5 +139,7 @@ export const tracksQuery = createApi({
 
 export const {
   useGetTracksAllQuery,
-  useGetFavouriteTracksAllQuery
+  useGetFavouriteTracksAllQuery,
+  useSetLikeMutation, 
+  useSetDislikeMutation
 } = tracksQuery;
