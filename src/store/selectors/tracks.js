@@ -7,4 +7,5 @@ export const shuffledAllTracksSelector = (store) =>
   store.tracks.shuffledAllTracks;
 export const shuffledSelector = (store) => store.tracks.shuffled;
 export const favouritesTracksSelector = (store) => store.tracks.favouritesTracks;
+export const currentPlaylistSelector = (store) => store.tracks.currentPlaylist;
 

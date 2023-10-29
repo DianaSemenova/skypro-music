@@ -9,6 +9,7 @@ const initialState = {
   shuffled: false,
   shuffledAllTracks: [],
   favouritesTracks: [],
+  currentPlaylist: [],
 };
 
 const getShuffledAllTracks = (array) => {
@@ -55,13 +56,22 @@ export const trackSlice = createSlice({
     },
 
     toggleShuffleTracks: (state, action) => {
-      // const { shuffled } = action.payload;
       state.shuffled = action.payload;
+
       if (state.shuffled) {
-        console.log("Shuffled", getShuffledAllTracks(state.allTracks));
+        console.log("Shuffled", getShuffledAllTracks(state.currentPlaylist));
       }
       state.shuffledAllTracks =
-        state.shuffled && getShuffledAllTracks(state.allTracks);
+        state.shuffled && getShuffledAllTracks(state.currentPlaylist);
+
+      if (!state.shuffled) {
+        if (state.currentPage === "Main") {
+          state.currentPlaylist = state.allTracks;
+        }
+        if (state.currentPage === "Favourites") {
+          state.currentPlaylist = state.favouritesTracks;
+        }
+      }
     },
   },
 });

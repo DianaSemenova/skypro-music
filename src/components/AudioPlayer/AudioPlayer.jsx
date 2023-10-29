@@ -9,7 +9,7 @@ import { AudioVolume } from "../AudioVolume/AudioVolume";
 import { BarPlayerProgress } from "../AudioPlayerProgress/AudioPlayerProgress";
 import {
   isPlayingSelector,
-  allTracksSelector,
+  currentPlaylistSelector,
   indexCurrentTrackSelector,
   shuffledSelector,
   shuffledAllTracksSelector,
@@ -26,7 +26,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
   const isPlaying = useSelector(isPlayingSelector);
   const shuffled = useSelector(shuffledSelector);
   const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
-  const tracks = useSelector(allTracksSelector);
+  const tracks = useSelector(currentPlaylistSelector);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);

@@ -8,7 +8,7 @@ import {
 } from "../../store/slices/tracksSlice";
 import { useGetTracksAllQuery } from "../../servicesQuery/tracks";
 import {
-  allTracksSelector,
+  currentPlaylistSelector,
   shuffledAllTracksSelector,
   shuffledSelector,
 } from "../../store/selectors/tracks";
@@ -16,7 +16,7 @@ import {
 export function Main({ isLoading }) {
   const dispatch = useDispatch();
   const shuffled = useSelector(shuffledSelector);
-  const tracks = useSelector(allTracksSelector);
+  const tracks = useSelector(currentPlaylistSelector);
   const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
   const arrayTracksAll = shuffled ? shuffledAllTracks : tracks;
   const { data, isError } = useGetTracksAllQuery();
