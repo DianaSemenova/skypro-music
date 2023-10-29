@@ -11,14 +11,16 @@ import {
   currentPlaylistSelector,
   shuffledAllTracksSelector,
   shuffledSelector,
+  allTracksSelector
 } from "../../store/selectors/tracks";
 
 export function Main({ isLoading }) {
   const dispatch = useDispatch();
   const shuffled = useSelector(shuffledSelector);
-  const tracks = useSelector(currentPlaylistSelector);
+  const tracks = useSelector(allTracksSelector);
+  const currentPlaylist = useSelector(currentPlaylistSelector);
   const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
-  const arrayTracksAll = shuffled ? shuffledAllTracks : tracks;
+  const arrayTracksAll = shuffled ? shuffledAllTracks : currentPlaylist;
   const { data, isError } = useGetTracksAllQuery();
 
   useEffect(() => {
