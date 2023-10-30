@@ -11,15 +11,16 @@ function App() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isLoading) {
+    if (!isLoading) {
       const timer = setTimeout(() => {
         setLoading(false);
         console.log("isLoading", isLoading);
-      }, 3000);
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
   }, [isLoading]);
+
 
   const handleLogout = () => {
     localStorage.removeItem("user");

@@ -20,6 +20,7 @@ export function Main({ isLoading }) {
       console.log(data);
       dispatch(setAllTracks(data));
       dispatch(setCurrentPage("Main"));
+      console.log("isLoading", isLoading);
     }
   }, [data]);
 
