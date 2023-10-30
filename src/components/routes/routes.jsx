@@ -11,8 +11,7 @@ export function AppRoutes({
   setUser,
   user,
   isLoading,
-  setLoading,
-  handleCurrentTrack,
+  setLoading
 }) {
   return (
     <Routes>
@@ -26,13 +25,12 @@ export function AppRoutes({
               <Main
                 isLoading={isLoading}
                 setLoading={setLoading}
-                handleCurrentTrack={handleCurrentTrack}
               />
             }
           />
           <Route
             path="/favourites"
-            element={<Favourites handleCurrentTrack={handleCurrentTrack} />}
+            element={<Favourites />}
           />
           <Route path="/category/:id" element={<Category />} />
         </Route>

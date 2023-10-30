@@ -1,16 +1,30 @@
+import { useDispatch, useSelector } from "react-redux";
 import * as S from "./TrackList.style";
 import { Tracks } from "../TrackListItem/Tracks";
 import { TrackListTitle } from "../TracklistTitle/TrackListTitle";
 import { TrackListFilter } from "../TrackListFilter/TrackListFilter";
+import {
+  shuffledSelector,
+  currentPlaylistSelector,
+  shuffledAllTracksSelector,
+} from "../../store/selectors/tracks";
+import { setCurrentTrack } from "../../store/slices/tracksSlice";
 
-export function TrackList({
-  title,
-  error,
-  isLoading,
-  tracks,
-  handleCurrentTrack,
-}) {
+export function TrackList({ title, error, isLoading, tracks }) {
+  const dispatch = useDispatch();
+  const shuffled = useSelector(shuffledSelector);
+  const currentPlaylist = useSelector(currentPlaylistSelector);
+  const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
+  const arrayTracksAll = shuffled ? shuffledAllTracks : currentPlaylist;
   const authID = localStorage.getItem("userID");
+
+  const handleCurrentTrack = (track) => {
+    const indexCurrentTrack = arrayTracksAll.indexOf(track);
+    dispatch(setCurrentTrack({ track, indexCurrentTrack }));
+    console.log(track);
+    console.log("indexCurrentTrack: ", indexCurrentTrack);
+  };
+
   return (
     <>
       <S.centerblockH2 className="centerblock__h2">
