@@ -12,8 +12,10 @@ import {
   allTracksSelector,
   favouritesTracksSelector,
 } from "../../store/selectors/tracks";
-import { setCurrentTrack, setCurrentPlaylist } from "../../store/slices/tracksSlice";
-
+import {
+  setCurrentTrack,
+  setCurrentPlaylist,
+} from "../../store/slices/tracksSlice";
 
 export function TrackList({ title, error, isLoading, tracks }) {
   const dispatch = useDispatch();
@@ -58,6 +60,10 @@ export function TrackList({ title, error, isLoading, tracks }) {
           <div>Не удалось загрузить плейлист, попробуйте позже</div>
         ) : (
           <S.contentPlaylist>
+            {isLoading &&
+              new Array(20).fill(
+                <Tracks key={new Date()} isLoading={isLoading} />
+              )}
             {tracks &&
               tracks.map((track) => (
                 <S.playlistItem

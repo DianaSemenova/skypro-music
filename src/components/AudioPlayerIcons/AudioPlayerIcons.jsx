@@ -6,7 +6,8 @@ export function AudioPlayerIcons(props) {
   return (
     <S.playerBtn
       $style={props.alt}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation()
         setIsActive(!isActive);
         props.click();
       }}

@@ -4,17 +4,18 @@ import {
   currentTrackSelector,
   isPlayingSelector,
 } from "../../store/selectors/tracks";
-// import {
-//   useSetLikeMutation,
-//   useSetDislikeMutation,
-// } from "../../servicesQuery/tracks";
+import {
+  useSetLikeMutation,
+  useSetDislikeMutation,
+} from "../../servicesQuery/tracks";
+import { AudioPlayerIcons } from "../AudioPlayerIcons/AudioPlayerIcons";
 
-export function Tracks({ track, isLoading }) {
+export function Tracks({ track, isLiked, isLoading }) {
   const currentTrack = useSelector(currentTrackSelector);
   const isPlaying = useSelector(isPlayingSelector);
-  // const [setLike] = useSetLikeMutation();
-  // const [setDislike] = useSetDislikeMutation();
-  // const toggleLike = isLiked ? setDislike : setLike;
+  const [setLike] = useSetLikeMutation();
+  const [setDislike] = useSetDislikeMutation();
+  const toggleLike = isLiked ? setDislike : setLike;
 
   // const trackItems = tracks.map((track) => (
   //   <S.playlistItem key={track.id} onClick={() => handleCurrentTrack(track)}>
@@ -63,13 +64,19 @@ export function Tracks({ track, isLoading }) {
       ) : (
         <S.skeletonAlbum />
       )}
+      {!isLoading && (
+        <S.trackTime>
+          <AudioPlayerIcons
+            alt="like"
+            click={() => {
+              toggleLike(track.id);
+            }}
+            isActive={isLiked}
+          />
 
-      <div className="track__time">
-        <S.trackLikeSvg alt="time">
-          <use xlinkHref="img/icon/sprite.svg#icon-like" />
-        </S.trackLikeSvg>
-        <S.trackTimeText> {track.duration_in_seconds}</S.trackTimeText>
-      </div>
+          <S.trackTimeText> {track.duration_in_seconds}</S.trackTimeText>
+        </S.trackTime>
+      )}
     </S.playlistTrack>
   );
 
