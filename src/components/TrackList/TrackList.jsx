@@ -61,9 +61,12 @@ export function TrackList({ title, error, isLoading, tracks }) {
         ) : (
           <S.contentPlaylist>
             {isLoading &&
-              new Array(20).fill(
-                <Tracks key={new Date()} isLoading={isLoading} />
-              )}
+              // new Array(20).fill(
+              //   <Tracks key={Math.random()} isLoading={isLoading} />
+
+              new Array(10)
+                .fill()
+                .map(() => <Tracks key={Math.random()} isLoading={isLoading} />)}
             {tracks &&
               tracks.map((track) => (
                 <S.playlistItem
