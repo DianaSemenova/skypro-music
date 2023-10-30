@@ -8,4 +8,4 @@ export const shuffledAllTracksSelector = (store) =>
 export const shuffledSelector = (store) => store.tracks.shuffled;
 export const favouritesTracksSelector = (store) => store.tracks.favouritesTracks;
 export const currentPlaylistSelector = (store) => store.tracks.currentPlaylist;
-
+export const currentPageSelector = (store) => store.tracks.currentPage;

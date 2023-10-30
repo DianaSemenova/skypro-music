@@ -36,14 +36,26 @@ export const trackSlice = createSlice({
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
 
-      if (!state.shuffled) {
-        if (state.currentPage === "Main") {
-          state.currentPlaylist = state.allTracks;
-        }
-        if (state.currentPage === "Favourites") {
-          state.currentPlaylist = state.favouritesTracks;
-        }
-      }
+      // if (!state.shuffled) {
+      //   if (state.currentPage === "Main") {
+      //     state.currentPlaylist = state.allTracks;
+      //   }
+      //   if (state.currentPage === "Favourites") {
+      //     state.currentPlaylist = state.favouritesTracks;
+      //   }
+      // }
+    },
+    setCurrentPlaylist: (state, action) => {
+      state.currentPlaylist = action.payload;
+
+      // if (!state.shuffled) {
+      //   if (state.currentPage === "Main") {
+      //     state.currentPlaylist = state.allTracks;
+      //   }
+      //   if (state.currentPage === "Favourites") {
+      //     state.currentPlaylist = state.favouritesTracks;
+      //   }
+      // }
     },
 
     setCurrentTrack: (state, action) => {
@@ -85,6 +97,7 @@ export const {
   toggleShuffleTracks,
   setFavouriteTracksAll,
   setCurrentPage,
+  setCurrentPlaylist
 } = trackSlice.actions;
 
 export default trackSlice.reducer;

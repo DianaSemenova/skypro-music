@@ -8,15 +8,23 @@ import {
   shuffledSelector,
   currentPlaylistSelector,
   shuffledAllTracksSelector,
+  currentPageSelector,
+  allTracksSelector,
+  favouritesTracksSelector,
 } from "../../store/selectors/tracks";
-import { setCurrentTrack } from "../../store/slices/tracksSlice";
+import { setCurrentTrack, setCurrentPlaylist } from "../../store/slices/tracksSlice";
+
 
 export function TrackList({ title, error, isLoading, tracks }) {
   const dispatch = useDispatch();
   const shuffled = useSelector(shuffledSelector);
+  const allTracks = useSelector(allTracksSelector);
+  const favouritesTracks = useSelector(favouritesTracksSelector);
   const currentPlaylist = useSelector(currentPlaylistSelector);
   const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
+  const currentPage = useSelector(currentPageSelector);
   const arrayTracksAll = shuffled ? shuffledAllTracks : currentPlaylist;
+
   const authID = localStorage.getItem("userID");
 
   useEffect(() => {
@@ -24,6 +32,14 @@ export function TrackList({ title, error, isLoading, tracks }) {
   }, [isLoading]);
 
   const handleCurrentTrack = (track) => {
+    if (!shuffled) {
+      if (currentPage === "Main") {
+        dispatch(setCurrentPlaylist(allTracks));
+      }
+      if (currentPage === "Favourites") {
+        dispatch(setCurrentPlaylist(favouritesTracks));
+      }
+    }
     const indexCurrentTrack = arrayTracksAll.indexOf(track);
     dispatch(setCurrentTrack({ track, indexCurrentTrack }));
     console.log(track);
