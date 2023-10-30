@@ -10,22 +10,17 @@ import Layout from "./Layout";
 export function AppRoutes({
   setUser,
   user,
-  isLoading,
-  setLoading
 }) {
   return (
     <Routes>
       <Route path="/auth" element={<AuthPage setUser={setUser} />} />
 
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
-        <Route path="/" element={<Layout isLoading={isLoading} />}>
+        <Route path="/" element={<Layout />}>
           <Route
             path="/"
             element={
-              <Main
-                isLoading={isLoading}
-                setLoading={setLoading}
-              />
+              <Main/>
             }
           />
           <Route

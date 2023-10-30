@@ -9,9 +9,9 @@ import { currentTrackSelector } from "../../store/selectors/tracks";
 import CenterBlockSearch from "../CenterBlockSearch/CenterBlockSearch";
 import { useGetTracksAllQuery } from "../../servicesQuery/tracks";
 
-export default function Layout({ isLoading }) {
+export default function Layout() {
   const currentTrack = useSelector(currentTrackSelector);
-  const { isError } = useGetTracksAllQuery();
+  const { isError, isLoading } = useGetTracksAllQuery();
 
   // useEffect(() => {
   //   if (data) {
