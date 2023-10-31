@@ -22,7 +22,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     return result;
   }
   const logOut = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem(null);
     window.location.navigate("/auth");
   };
 
