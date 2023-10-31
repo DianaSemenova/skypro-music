@@ -26,8 +26,11 @@ export function TrackList({ title, error, isLoading, tracks }) {
   const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
   const currentPage = useSelector(currentPageSelector);
   const arrayTracksAll = shuffled ? shuffledAllTracks : currentPlaylist;
-
   const authID = localStorage.getItem("userID");
+
+  useEffect(() => {
+    console.log("authID", authID);
+  }, [authID]);
 
   useEffect(() => {
     console.log("isLoadingTrackList", isLoading);
@@ -61,12 +64,11 @@ export function TrackList({ title, error, isLoading, tracks }) {
         ) : (
           <S.contentPlaylist>
             {isLoading &&
-              // new Array(20).fill(
-              //   <Tracks key={Math.random()} isLoading={isLoading} />
-
-              new Array(10)
+              new Array(20)
                 .fill()
-                .map(() => <Tracks key={Math.random()} isLoading={isLoading} />)}
+                .map(() => (
+                  <Tracks key={Math.random()} isLoading={isLoading} />
+                ))}
             {tracks &&
               tracks.map((track) => (
                 <S.playlistItem
@@ -74,6 +76,8 @@ export function TrackList({ title, error, isLoading, tracks }) {
                   onClick={() => handleCurrentTrack(track)}
                 >
                   <Tracks
+                    key={track.id}
+                    onClick={() => handleCurrentTrack(track)}
                     isLoading={isLoading}
                     track={track}
                     isLiked={

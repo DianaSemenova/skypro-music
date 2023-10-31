@@ -81,7 +81,8 @@ const iconsSvg = {
     width: 14px;
     height: 12px;
     margin-right: 17px;
-    fill: ${(props) => (props.$active ? "#B672FF" : "#transparent")};
+    // fill: ${(props) => (props.$active ? "#B672FF" : "#transparent")};
+    fill: #transparent;
     stroke: "#696969";
   `,
 };
