@@ -128,12 +128,17 @@ export function AudioPlayer({ isLoading, currentTrack }) {
                   toggleCurrentTrack("next");
                 }}
               />
-              <AudioPlayerIcons alt="repeat" click={toggleTrackRepeat} />
+              <AudioPlayerIcons
+                alt="repeat"
+                click={toggleTrackRepeat}
+                isActive={repeatTrack}
+              />
               <AudioPlayerIcons
                 alt="shuffle"
                 click={() => {
                   dispatch(toggleShuffleTracks(!shuffled));
                 }}
+                isActive={shuffled}
               />
             </S.playerControls>
             <S.playerTrackPlay>
@@ -151,7 +156,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
                     </S.trackPlayAuthorLink>
                   </S.trackPlayAuthor>
                 ) : (
-                  <SkeletonPlayBar/>
+                  <SkeletonPlayBar />
                 )}
 
                 {!isLoading ? (
@@ -161,7 +166,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
                     </S.trackPlayAlbumLink>
                   </S.trackPlayAlbum>
                 ) : (
-                  <SkeletonPlayBar/>
+                  <SkeletonPlayBar />
                 )}
               </S.trackPlayContain>
               <S.trackPlayLikeDis>

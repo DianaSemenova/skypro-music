@@ -80,10 +80,15 @@ export function TrackList({ title, error, isLoading, tracks }) {
                     onClick={() => handleCurrentTrack(track)}
                     isLoading={isLoading}
                     track={track}
+                    tracks={tracks}
                     isLiked={
                       title === "Мои треки"
                         ? true
-                        : track.stared_user?.find((user) => user.id === authID)
+                        : !!(track.stared_user ?? []).find(
+                            (user) => user.id === authID
+                          )
+
+                      // Boolean(track?.stared_user?.find((user) => user.id === authID))
                     }
                   />
                 </S.playlistItem>
