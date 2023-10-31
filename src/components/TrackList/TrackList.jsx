@@ -32,10 +32,6 @@ export function TrackList({ title, error, isLoading, tracks }) {
     console.log("authID", authID);
   }, [authID]);
 
-  useEffect(() => {
-    console.log("isLoadingTrackList", isLoading);
-  }, [isLoading]);
-
   const handleCurrentTrack = (track) => {
     if (!shuffled) {
       if (currentPage === "Main") {

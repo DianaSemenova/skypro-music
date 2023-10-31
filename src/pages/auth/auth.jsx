@@ -36,8 +36,6 @@ export function AuthPage({ setUser }) {
     try {
       const response = await loginUserApi(email, password);
       responseToken();
-
-      console.log(email);
       console.log(response.username);
       setUser(response.username);
       localStorage.setItem("user", response.username);

@@ -19,7 +19,6 @@ export function Favourites() {
       console.log("favouritesTracks", data);
       dispatch(setFavouriteTracksAll(data));
       dispatch(setCurrentPage("Favourites"));
-      console.log("isLoading", isLoading);
     }
   }, [data]);
 

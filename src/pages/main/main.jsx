@@ -15,7 +15,6 @@ export function Main() {
       console.log(data);
       dispatch(setAllTracks(data));
       dispatch(setCurrentPage("Main"));
-      console.log("isLoadingMain", isLoading);
     }
   }, [data]);
 

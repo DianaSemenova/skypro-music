@@ -8,20 +8,7 @@ import { store } from "./store/store";
 
 function App() {
   const [user, setUser] = useState(localStorage.getItem("user") || null);
-  // const [isLoading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     const timer = setTimeout(() => {
-  //       setLoading(false);
-  //       console.log("isLoading", isLoading);
-  //     }, 5000);
-
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [isLoading]);
-
-
+ 
   const handleLogout = () => {
     localStorage.removeItem("user");
     window.location.href = "/auth";
