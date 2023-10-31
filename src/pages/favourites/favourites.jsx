@@ -29,6 +29,7 @@ export function Favourites() {
         tracks={favouritesTracks}
         error={error}
         isLoading={isLoading}
+        isFavorites
       />
       {isLoading && <div>Загрузка...</div>}
       {error && <div>{error}</div>}

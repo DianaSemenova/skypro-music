@@ -17,7 +17,7 @@ import {
   setCurrentPlaylist,
 } from "../../store/slices/tracksSlice";
 
-export function TrackList({ title, error, isLoading, tracks }) {
+export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
   const dispatch = useDispatch();
   const shuffled = useSelector(shuffledSelector);
   const allTracks = useSelector(allTracksSelector);
@@ -77,12 +77,13 @@ export function TrackList({ title, error, isLoading, tracks }) {
                     isLoading={isLoading}
                     track={track}
                     tracks={tracks}
-                    isLiked={
-                      title === "Мои треки"
-                        ? true
-                        : !!(track.stared_user ?? []).find(
-                            (user) => user.id === authID
-                          )
+                    isFavorites={
+                      // title === "Мои треки"
+                      //   ? true
+                      //   : !!(track.stared_user ?? []).find(
+                      //       (user) => user.id === authID
+                      //     )
+                      isFavorites
 
                       // Boolean(track?.stared_user?.find((user) => user.id === authID))
                     }

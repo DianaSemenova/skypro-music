@@ -11,7 +11,7 @@ import {
 } from "../../servicesQuery/tracks";
 import { AudioPlayerIcons } from "../AudioPlayerIcons/AudioPlayerIcons";
 
-export function Tracks({ track, isLoading }) {
+export function Tracks({ track, isLoading, isFavorites = false }) {
   const currentTrack = useSelector(currentTrackSelector);
   const isPlaying = useSelector(isPlayingSelector);
   const [setLike] = useSetLikeMutation();
@@ -20,13 +20,17 @@ export function Tracks({ track, isLoading }) {
   const isUserLike = Boolean(
     track?.stared_user?.find((user) => user.id === auth)
   );
-
   const [isLiked, setIsLiked] = useState(isUserLike);
 
   useEffect(() => {
-    setIsLiked(isUserLike);
-    console.log("isUserLike", isUserLike);
-  }, [isUserLike]);
+    if (isFavorites) {
+      setIsLiked(isFavorites);
+      console.log("isFavorites", isFavorites);
+    } else {
+      setIsLiked(isUserLike);
+      console.log("isUserLike", isUserLike);
+    }
+  }, [isUserLike, isFavorites]);
 
   const handleLike = async (id) => {
     setIsLiked(true);
