@@ -5,12 +5,12 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
     baseUrl: "https://skypro-music-api.skyeng.tech",
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().token.accessToken;
+      const newToken = getState().token.accessToken;
 
-      console.log("accessToken", token);
+      console.log("accessToken", newToken);
 
-      if (token) {
-        headers.set("authorization", `Bearer ${token}`);
+      if (newToken) {
+        headers.set("authorization", `Bearer ${newToken}`);
       }
       return headers;
     },
@@ -26,9 +26,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     window.location.navigate("/auth");
   };
 
-  const { tokenReducer } = api.getState();
+  const { token } = api.getState();
 
-  if (!tokenReducer.refreshToken) {
+  if (!token.refreshToken) {
     return logOut();
   }
 
@@ -37,7 +37,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       url: "user/token/refresh/",
       method: "POST",
       body: {
-        refresh: tokenReducer.refreshToken,
+        refresh: token.refreshToken,
       },
     },
     api,
@@ -51,7 +51,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   api.dispatch(
     setToken({
       accessToken: refreshToken.data.access,
-      refreshToken: tokenReducer.refreshToken,
+      refreshToken: token.refreshToken,
     })
   );
 
@@ -67,7 +67,7 @@ export const tracksQuery = createApi({
   reducerPath: "tracksQuery",
   tagTypes: ["Tracks", "Favorites"],
   baseQuery: baseQueryWithReauth,
- 
+
   endpoints: (build) => ({
     getTracksAll: build.query({
       query: () => "catalog/track/all/",
@@ -140,6 +140,6 @@ export const tracksQuery = createApi({
 export const {
   useGetTracksAllQuery,
   useGetFavouriteTracksAllQuery,
-  useSetLikeMutation, 
-  useSetDislikeMutation
+  useSetLikeMutation,
+  useSetDislikeMutation,
 } = tracksQuery;
