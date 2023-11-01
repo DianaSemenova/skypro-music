@@ -26,7 +26,7 @@ export function Sidebar({ isLoading, loadingTracksError }) {
   return (
     <S.mainSidebar>
       <S.sidebarPersonal>
-        <S.sidebarPersonalName>{user}</S.sidebarPersonalName>
+        <S.sidebarPersonalName>{user.username}</S.sidebarPersonalName>
         <S.sidebarIcon onClick={handleLogout}>
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout" />

@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { registrationUserApi, loginUserApi } from "../../api/ApiUsersLogin";
-import * as S from "./auth.style";
+import * as S from "./authPage.style";
 import { useAccessTokenUserMutation } from "../../servicesQuery/token";
-import { setToken } from "../../store/slices/tokenSlice";
+import { setAuth } from "../../store/slices/authSlice";
 
 export function AuthPage({ setUser }) {
   const dispatch = useDispatch();
@@ -24,22 +24,22 @@ export function AuthPage({ setUser }) {
       .unwrap()
       .then((token) => {
         console.log("token", token);
-        localStorage.setItem("refreshToken", token.refresh);
-        localStorage.setItem("accessToken", token.access);
         dispatch(
-          setToken({ accessToken: token.access, refreshToken: token.refresh })
+          setAuth({
+            access: token.access,
+            refresh: token.refresh,
+            user: JSON.parse(localStorage.getItem("user")),
+          })
         );
       });
   };
-
   const handleLogin = async () => {
     try {
-      responseToken();
-      const response = await loginUserApi(email, password);      
+      const response = await loginUserApi(email, password);
       console.log(response.username);
-      setUser(response.username);
-      localStorage.setItem("user", response.username);
-      localStorage.setItem("userID", response.id);
+      setUser(response);
+      localStorage.setItem("user", JSON.stringify(response));
+      responseToken();
       setOffButton(true);
       navigate("/");
     } catch (currentError) {
@@ -47,6 +47,8 @@ export function AuthPage({ setUser }) {
     } finally {
       setOffButton(false);
     }
+
+   
   };
 
   const handleRegister = async () => {
@@ -54,12 +56,12 @@ export function AuthPage({ setUser }) {
       setError("Пароли не совпадают");
     } else {
       try {
-        responseToken();
         const response = await registrationUserApi(email, password);
         console.log(response);
         setOffButton(true);
-        setUser(response.username);
-        localStorage.setItem("user", response.username);
+        setUser(response);
+        localStorage.setItem("user", JSON.stringify(response));
+        responseToken();
         navigate("/");
       } catch (currentError) {
         setError(currentError.message);

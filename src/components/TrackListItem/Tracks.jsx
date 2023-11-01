@@ -16,9 +16,9 @@ export function Tracks({ track, isLoading, isFavorites = false }) {
   const isPlaying = useSelector(isPlayingSelector);
   const [setLike] = useSetLikeMutation();
   const [setDislike] = useSetDislikeMutation();
-  const auth = JSON.parse(localStorage.getItem("userID"));
+  const auth = JSON.parse(localStorage.getItem("user"));
   const isUserLike = Boolean(
-    track?.stared_user?.find((user) => user.id === auth)
+    track?.stared_user?.find((user) => user.id === auth.id)
   );
   const [isLiked, setIsLiked] = useState(isUserLike);
 
@@ -59,7 +59,7 @@ export function Tracks({ track, isLoading, isFavorites = false }) {
     <S.playlistTrack>
       <S.trackTitle>
         <S.trackTitleImage>
-          {currentTrack && currentTrack.id === track.id ? (
+          {currentTrack && currentTrack.id === track?.id ? (
             <S.PointPlaying $playing={isPlaying} />
           ) : (
             <S.trackTitleSvg alt="music">

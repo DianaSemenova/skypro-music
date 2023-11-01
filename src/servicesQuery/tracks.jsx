@@ -1,16 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setToken } from "../store/slices/tokenSlice";
+import { setAuth } from "../store/slices/authSlice";
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
     baseUrl: "https://skypro-music-api.skyeng.tech",
     prepareHeaders: (headers, { getState }) => {
-      const newToken = getState().token.accessToken;
+      const token = getState().auth.access;
 
-      console.log("accessToken", newToken);
+      console.log("accessToken", token);
 
-      if (newToken) {
-        headers.set("authorization", `Bearer ${newToken}`);
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
       }
       return headers;
     },
@@ -22,14 +22,14 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     return result;
   }
   const logOut = () => {
-    api.dispatch(setToken(null));
-    // localStorage.removeItem("user");
+    api.dispatch(setAuth(null));
+    // localStorage.removeItem("auth");
     // window.location.href("/auth");
   };
 
-  const { token } = api.getState();
+  const { auth } = api.getState();
 
-  if (!token.refreshToken) {
+  if (!auth.refresh) {
     return logOut();
   }
 
@@ -38,7 +38,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       url: "user/token/refresh/",
       method: "POST",
       body: {
-        refresh: token.refreshToken,
+        refresh: auth.refresh,
       },
     },
     api,
@@ -49,12 +49,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     return logOut();
   }
 
-  api.dispatch(
-    setToken({
-      accessToken: refreshToken.data.access,
-      refreshToken: token.refreshToken,
-    })
-  );
+  api.dispatch(setAuth({ ...auth, access: refreshToken.data.access }));
 
   const retryResult = await baseQuery(args, api, extraOptions);
 
@@ -112,29 +107,6 @@ export const tracksQuery = createApi({
         { type: "Tracks", id: "LIST" },
       ],
     }),
-
-    // accessTokenUser: build.mutation({
-    //   query: (body) => ({
-    //     url: "user/token/",
-    //     method: "POST",
-    //     body,
-    //     headers: {
-    //       "content-type": "application/json",
-    //     },
-    //     invalidatesTags: [{ type: "Tracks", id: "LIST" }],
-    //   }),
-    // }),
-    // refreshTokenUser: build.mutation({
-    //   query: (body) => ({
-    //     url: "user/token/refresh/",
-    //     method: "POST",
-    //     body,
-    //     headers: {
-    //       "content-type": "application/json",
-    //     },
-    //     invalidatesTags: [{ type: "Tracks", id: "LIST" }],
-    //   }),
-    // }),
   }),
 });
 

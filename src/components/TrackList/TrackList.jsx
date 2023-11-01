@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import * as S from "./TrackList.style";
 import { Tracks } from "../TrackListItem/Tracks";
 import { TrackListTitle } from "../TracklistTitle/TrackListTitle";
@@ -27,11 +26,6 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
   const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
   const currentPage = useSelector(currentPageSelector);
   const arrayTracksAll = shuffled ? shuffledAllTracks : currentPlaylist;
-  const authID = localStorage.getItem("userID");
-
-  useEffect(() => {
-    console.log("authID", authID);
-  }, [authID]);
 
   const handleCurrentTrack = (track) => {
     // if (shuffled) {
@@ -50,7 +44,6 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
     const indexCurrentTrack = arrayTracksAll.indexOf(track);
     dispatch(setCurrentTrack({ track, indexCurrentTrack }));
     console.log(track);
-    console.log("indexCurrentTrack: ", indexCurrentTrack);
   };
 
   return (

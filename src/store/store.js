@@ -1,16 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import tracksReducer from "./slices/tracksSlice";
-import tokenReducer from "./slices/tokenSlice";
+import authReduces from "./slices/authSlice";
 import { tracksQuery } from "../servicesQuery/tracks";
 import { tokenQuery } from "../servicesQuery/token";
 
 export const store = configureStore({
   reducer: {
     tracks: tracksReducer,
-    token: tokenReducer,
+    auth: authReduces,
     [tracksQuery.reducerPath]: tracksQuery.reducer,
     [tokenQuery.reducerPath]: tokenQuery.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(tracksQuery.middleware).concat(tokenQuery.middleware),
+    getDefaultMiddleware()
+      .concat(tracksQuery.middleware)
+      .concat(tokenQuery.middleware),
 });

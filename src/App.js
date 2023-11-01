@@ -10,7 +10,8 @@ function App() {
   const [user, setUser] = useState(localStorage.getItem("user") || null);
  
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("auth");
+    localStorage.removeItem("user"); 
     window.location.href = "/auth";
   };
 
