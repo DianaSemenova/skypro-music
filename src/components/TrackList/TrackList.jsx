@@ -15,6 +15,7 @@ import {
 import {
   setCurrentTrack,
   setCurrentPlaylist,
+  toggleShuffleTracks,
 } from "../../store/slices/tracksSlice";
 
 export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
@@ -33,14 +34,19 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
   }, [authID]);
 
   const handleCurrentTrack = (track) => {
-    if (!shuffled) {
-      if (currentPage === "Main") {
-        dispatch(setCurrentPlaylist(allTracks));
-      }
-      if (currentPage === "Favourites") {
-        dispatch(setCurrentPlaylist(favouritesTracks));
-      }
+    // if (shuffled) {
+    if (currentPage === "Main") {
+      dispatch(setCurrentPlaylist(allTracks));
     }
+    if (currentPage === "Favourites") {
+      dispatch(setCurrentPlaylist(favouritesTracks));
+    }
+    // }
+
+    if (shuffled) {
+      dispatch(toggleShuffleTracks({ shuffled }));
+    }
+
     const indexCurrentTrack = arrayTracksAll.indexOf(track);
     dispatch(setCurrentTrack({ track, indexCurrentTrack }));
     console.log(track);

@@ -34,8 +34,8 @@ export function AuthPage({ setUser }) {
 
   const handleLogin = async () => {
     try {
-      const response = await loginUserApi(email, password);
       responseToken();
+      const response = await loginUserApi(email, password);      
       console.log(response.username);
       setUser(response.username);
       localStorage.setItem("user", response.username);
@@ -54,13 +54,13 @@ export function AuthPage({ setUser }) {
       setError("Пароли не совпадают");
     } else {
       try {
-        const response = await registrationUserApi(email, password);
         responseToken();
+        const response = await registrationUserApi(email, password);
         console.log(response);
         setOffButton(true);
         setUser(response.username);
         localStorage.setItem("user", response.username);
-        window.location.href = "/";
+        navigate("/");
       } catch (currentError) {
         setError(currentError.message);
         console.log(error);

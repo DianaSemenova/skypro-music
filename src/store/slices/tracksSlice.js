@@ -66,6 +66,19 @@ export const trackSlice = createSlice({
       }
       state.shuffledAllTracks =
         state.shuffled && getShuffledAllTracks(state.currentPlaylist);
+
+      // if (!state.shuffled) {
+      //   if (state.currentPage === "Main") {
+      //     state.currentPlaylist = state.allTracks;
+      //   }
+      //   if (state.currentPage === "Favourites") {
+      //     state.currentPlaylist = state.favouritesTracks;
+      //   }
+
+      //   if (state.shuffled) {
+      //     getShuffledAllTracks(state.currentPlayList)
+      //   }
+      // }
     },
   },
 });
@@ -79,7 +92,7 @@ export const {
   toggleShuffleTracks,
   setFavouriteTracksAll,
   setCurrentPage,
-  setCurrentPlaylist, 
+  setCurrentPlaylist,
 } = trackSlice.actions;
 
 export default trackSlice.reducer;
