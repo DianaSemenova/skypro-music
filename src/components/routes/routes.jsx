@@ -5,8 +5,7 @@ import { Favourites } from "../../pages/favourites/favourites";
 import { Category } from "../../pages/category/category";
 import { AuthPage } from "../../pages/auth/authPage";
 import { ProtectedRoute } from "./ProtectedRoute";
-import Layout from "./Layout";
-
+import Layout from "../../pages/layout/Layout";
 
 export function AppRoutes({ user, setUser }) {
   return (
