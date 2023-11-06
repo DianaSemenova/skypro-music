@@ -51,7 +51,7 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
       <S.centerblockH2 className="centerblock__h2">
         {title || "Треки"}
       </S.centerblockH2>
-      <TrackListFilter />
+      <TrackListFilter tracks={tracks} />
       <S.centerblockContent>
         <TrackListTitle />
         {error ? (

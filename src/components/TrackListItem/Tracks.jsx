@@ -25,10 +25,10 @@ export function Tracks({ track, isLoading, isFavorites = false }) {
   useEffect(() => {
     if (isFavorites) {
       setIsLiked(isFavorites);
-      console.log("isFavorites", isFavorites);
+      // console.log("isFavorites", isFavorites);
     } else {
       setIsLiked(isUserLike);
-      console.log("isUserLike", isUserLike);
+      // console.log("isUserLike", isUserLike);
     }
   }, [isUserLike, isFavorites]);
 
@@ -44,16 +44,6 @@ export function Tracks({ track, isLoading, isFavorites = false }) {
 
   const toggleLikeDislike = (id) =>
     isLiked ? handleDislike(id) : handleLike(id);
-
-  // const handleLikeClick = () => {
-  //   if (isLiked) {
-  //     setDislike({ id: track.id });
-  //     setIsLiked(true);
-  //   } else {
-  //     setLike({ id: track.id });
-  //     setIsLiked(false);
-  //   }
-  // };
 
   return (
     <S.playlistTrack>

@@ -1,18 +1,20 @@
 import { useState } from "react";
+import uniq from "lodash/uniq";
 import * as S from "./TrackListFilter.style";
 import { TrackListFilterCategory } from "../TrackListFilterCategory/TrackListFilterCategory";
-import arrTracks from "../../utils/dataTracks";
 
-export function TrackListFilter() {
+export function TrackListFilter({ tracks }) {
   const [activeCategoryFilter, setActiveCategoryFilter] = useState("");
   return (
     <S.centerblockFilter>
       <S.filterTitle>Искать по:</S.filterTitle>
       <TrackListFilterCategory
         nameCategory="исполнителю"
-        content={arrTracks.map((track) => (
-          <S.filterItem key={track.id}>{track.trackAuthor}</S.filterItem>
-        ))}
+        content={uniq(tracks.map((track) => track.author)).map(
+          (author) => (
+            <S.filterItem key={author}>{author}</S.filterItem>
+          )
+        )}
         isActiveCategory={activeCategoryFilter}
         setActiveCategory={setActiveCategoryFilter}
       />
@@ -20,17 +22,28 @@ export function TrackListFilter() {
         nameCategory="году выпуска"
         isActiveCategory={activeCategoryFilter}
         setActiveCategory={setActiveCategoryFilter}
-        content={arrTracks.map((track) => (
-          <S.filterItem key={track.id}>{track.year}</S.filterItem>
-        ))}
+        content={["По умолчанию", "Сначала новые", "Сначала старые"].map(
+          (item) => (
+            <S.filterItem key={item}>{item}</S.filterItem>
+          )
+        )}
       />
       <TrackListFilterCategory
         nameCategory="жанру"
         isActiveCategory={activeCategoryFilter}
         setActiveCategory={setActiveCategoryFilter}
-        content={arrTracks.map((track) => (
-          <S.filterItem key={track.id}>{track.genre}</S.filterItem>
-        ))}
+        content={uniq(tracks.map((track) => track.genre)).map(
+          (genre) => (
+            <S.filterItem
+              key={genre}
+              onClick={() => {               
+                console.log("genre filter: ", genre);
+              }}
+            >
+              {genre}
+            </S.filterItem>
+          )
+        )}
       />
     </S.centerblockFilter>
   );
