@@ -145,7 +145,7 @@ export function AudioPlayer({ isLoading, currentTrack }) {
               <S.trackPlayContain>
                 <S.trackPlayImage>
                   <S.trackPlaySvg alt="music">
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="../img/icon/sprite.svg#icon-note" />
                   </S.trackPlaySvg>
                 </S.trackPlayImage>
 
@@ -172,12 +172,12 @@ export function AudioPlayer({ isLoading, currentTrack }) {
               <S.trackPlayLikeDis>
                 <S.trackPlayLike>
                   <S.trackPlayLikeSvg alt="like">
-                    <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                    <use xlinkHref="../img/icon/sprite.svg#icon-like" />
                   </S.trackPlayLikeSvg>
                 </S.trackPlayLike>
                 <S.trackPlayDislike>
                   <S.trackPlayDislikeSvg alt="dislike">
-                    <use xlinkHref="img/icon/sprite.svg#icon-dislike" />
+                    <use xlinkHref="../img/icon/sprite.svg#icon-dislike" />
                   </S.trackPlayDislikeSvg>
                 </S.trackPlayDislike>
               </S.trackPlayLikeDis>

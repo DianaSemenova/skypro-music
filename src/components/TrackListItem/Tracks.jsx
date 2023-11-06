@@ -52,7 +52,7 @@ export function Tracks({ track, isLoading, isFavorites = false }) {
             <S.PointPlaying $playing={isPlaying} />
           ) : (
             <S.trackTitleSvg alt="music">
-              <use xlinkHref="img/icon/sprite.svg#icon-note" />
+              <use xlinkHref="../img/icon/sprite.svg#icon-note" />
             </S.trackTitleSvg>
           )}
         </S.trackTitleImage>
