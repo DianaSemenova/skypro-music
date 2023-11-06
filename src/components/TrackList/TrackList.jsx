@@ -10,6 +10,7 @@ import {
   currentPageSelector,
   allTracksSelector,
   favouritesTracksSelector,
+  categoryArrSelector
 } from "../../store/selectors/tracks";
 import {
   setCurrentTrack,
@@ -21,6 +22,7 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
   const dispatch = useDispatch();
   const shuffled = useSelector(shuffledSelector);
   const allTracks = useSelector(allTracksSelector);
+  const categoryArr = useSelector(categoryArrSelector);
   const favouritesTracks = useSelector(favouritesTracksSelector);
   const currentPlaylist = useSelector(currentPlaylistSelector);
   const shuffledAllTracks = useSelector(shuffledAllTracksSelector);
@@ -34,6 +36,9 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
     }
     if (currentPage === "Favourites") {
       dispatch(setCurrentPlaylist(favouritesTracks));
+    }
+    if (currentPage === "Category") {
+      dispatch(setCurrentPlaylist(categoryArr));
     }
     // }
 

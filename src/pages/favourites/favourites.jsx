@@ -23,27 +23,12 @@ export function Favourites() {
   }, [data]);
 
   return (
-    <>
-      <TrackList
-        title="Мои треки"
-        tracks={favouritesTracks}
-        error={error}
-        isLoading={isLoading}
-        isFavorites
-      />
-      {isLoading && <div>Загрузка...</div>}
-      {error && <div>{error}</div>}
-    </>
+    <TrackList
+      title="Мои треки"
+      tracks={favouritesTracks}
+      error={error}
+      isLoading={isLoading}
+      isFavorites
+    />
   );
-
-  // return (
-  //   <S.wrapper>
-  //     <S.container>
-  //       <S.main>
-  //         <h1>FavouritesPages</h1>
-  //       </S.main>
-  //       <footer className="footer" />
-  //     </S.container>
-  //   </S.wrapper>
-  // );
 }

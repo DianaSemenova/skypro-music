@@ -25,7 +25,6 @@ export function Tracks({ track, isLoading, isFavorites = false }) {
   useEffect(() => {
     if (isFavorites) {
       setIsLiked(isFavorites);
-      // console.log("isFavorites", isFavorites);
     } else {
       setIsLiked(isUserLike);
       // console.log("isUserLike", isUserLike);
@@ -98,7 +97,7 @@ export function Tracks({ track, isLoading, isFavorites = false }) {
             }}
             isActive={isLiked}
           />
-          <S.trackTimeText> {track.duration_in_seconds}</S.trackTimeText>
+          <S.trackTimeText>{track.duration_in_seconds}</S.trackTimeText>
         </S.trackTime>
       )}
     </S.playlistTrack>
