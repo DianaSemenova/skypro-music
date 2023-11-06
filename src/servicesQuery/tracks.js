@@ -61,7 +61,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const tracksQuery = createApi({
   reducerPath: "tracksQuery",
-  tagTypes: ["Tracks", "Favorites"],
+  tagTypes: ["Tracks", "Favorites", "Selections"],
   baseQuery: baseQueryWithReauth,
 
   endpoints: (build) => ({
@@ -94,6 +94,7 @@ export const tracksQuery = createApi({
       invalidatesTags: [
         { type: "Favorites", id: "LIST" },
         { type: "Tracks", id: "LIST" },
+        { type: "Selections", id: "LIST" },
       ],
     }),
 
@@ -105,6 +106,7 @@ export const tracksQuery = createApi({
       invalidatesTags: [
         { type: "Favorites", id: "LIST" },
         { type: "Tracks", id: "LIST" },
+        { type: "Selections", id: "LIST" },
       ],
     }),
 
