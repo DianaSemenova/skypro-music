@@ -7,8 +7,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.access;
 
-      console.log("accessToken", token);
-
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
       }
@@ -128,5 +126,5 @@ export const {
   useGetFavouriteTracksAllQuery,
   useSetLikeMutation,
   useSetDislikeMutation,
-  useGetSelectionsQuery
+  useGetSelectionsQuery,
 } = tracksQuery;

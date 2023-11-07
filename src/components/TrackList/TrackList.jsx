@@ -10,7 +10,7 @@ import {
   currentPageSelector,
   allTracksSelector,
   favouritesTracksSelector,
-  categoryArrSelector
+  categoryArrSelector,
 } from "../../store/selectors/tracks";
 import {
   setCurrentTrack,
@@ -81,16 +81,7 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
                     isLoading={isLoading}
                     track={track}
                     tracks={tracks}
-                    isFavorites={
-                      // title === "Мои треки"
-                      //   ? true
-                      //   : !!(track.stared_user ?? []).find(
-                      //       (user) => user.id === authID
-                      //     )
-                      isFavorites
-
-                      // Boolean(track?.stared_user?.find((user) => user.id === authID))
-                    }
+                    isFavorites={isFavorites}
                   />
                 </S.playlistItem>
               ))}
