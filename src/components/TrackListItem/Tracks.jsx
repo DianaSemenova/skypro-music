@@ -10,6 +10,7 @@ import {
   useSetDislikeMutation,
 } from "../../servicesQuery/tracks";
 import { AudioPlayerIcons } from "../AudioPlayerIcons/AudioPlayerIcons";
+import getDurationAudion from "../../utils/durationAudio";
 
 export function Tracks({ track, isLoading, isFavorites = false }) {
   const currentTrack = useSelector(currentTrackSelector);
@@ -97,7 +98,10 @@ export function Tracks({ track, isLoading, isFavorites = false }) {
             }}
             isActive={isLiked}
           />
-          <S.trackTimeText>{track.duration_in_seconds}</S.trackTimeText>
+          <S.trackTimeText>
+            {getDurationAudion(track.duration_in_seconds)}
+          </S.trackTimeText>
+          <S.trackTimeText/>
         </S.trackTime>
       )}
     </S.playlistTrack>
