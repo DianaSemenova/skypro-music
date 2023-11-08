@@ -7,12 +7,20 @@ import {
   setCurrentPage,
 } from "../../store/slices/tracksSlice";
 import { TrackList } from "../../components/TrackList/TrackList";
-import { favouritesTracksSelector } from "../../store/selectors/tracks";
+import { favouritesTracksSelector, filtersPlaylistSelector } from "../../store/selectors/tracks";
 
 export function Favourites() {
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetFavouriteTracksAllQuery();
   const favouritesTracks = useSelector(favouritesTracksSelector);
+  const filtred = useSelector(filtersPlaylistSelector);
+  const tracks = filtred?.isActiveSort ? filtred?.filterTracksArr : favouritesTracks;
+
+  useEffect(() => {
+    console.log("filterFavourites", filtred.isActiveSort);
+    console.log("tracksFavourites", tracks);
+    dispatch(setFavouriteTracksAll(data));
+  }, [filtred.isActiveSort, tracks]);
 
   useEffect(() => {
     if (data) {
@@ -25,7 +33,7 @@ export function Favourites() {
   return (
     <TrackList
       title="Мои треки"
-      tracks={favouritesTracks}
+      tracks={tracks}
       error={error}
       isLoading={isLoading}
       isFavorites

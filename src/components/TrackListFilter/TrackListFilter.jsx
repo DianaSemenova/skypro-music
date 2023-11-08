@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import uniq from "lodash/uniq";
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./TrackListFilter.style";
@@ -10,35 +10,47 @@ export function TrackListFilter({ tracks, currentPage }) {
   const dispatch = useDispatch();
   const [activeCategoryFilter, setActiveCategoryFilter] = useState("");
   const selectedFiltersPlaylist = useSelector(filtersPlaylistSelector);
- 
+
+  useEffect(() => {
+    console.log("author filter: ", selectedFiltersPlaylist?.authors);
+  }, [selectedFiltersPlaylist?.authors]);
+
   return (
     <S.centerblockFilter>
       <S.filterDiv>
         <S.filterTitle>Искать по:</S.filterTitle>
         <TrackListFilterCategory
           nameCategory="исполнителю"
-          content={uniq(tracks.map((track) => track.author)).map((author) => (
-            <S.filterItem key={author}>{author}</S.filterItem>
+          content={uniq(tracks?.map((track) => track?.author)).map((author) => (
+            <S.filterItem
+              key={author}
+              onClick={() => {
+                dispatch(setFilterPlaylist({ authors: author }));
+              }}
+            >
+              {author}
+            </S.filterItem>
           ))}
           isActiveCategory={activeCategoryFilter}
           setActiveCategory={setActiveCategoryFilter}
         />
-        {currentPage !== "Category" &&
-        <TrackListFilterCategory
-          nameCategory="жанру"
-          isActiveCategory={activeCategoryFilter}
-          setActiveCategory={setActiveCategoryFilter}
-          content={uniq(tracks.map((track) => track.genre)).map((genre) => (
-            <S.filterItem
-              key={genre}
-              onClick={() => {
-                console.log("genre filter: ", genre);
-              }}
-            >
-              {genre}
-            </S.filterItem>
-          ))}
-        />}
+        {currentPage !== "Category" && (
+          <TrackListFilterCategory
+            nameCategory="жанру"
+            isActiveCategory={activeCategoryFilter}
+            setActiveCategory={setActiveCategoryFilter}
+            content={uniq(tracks?.map((track) => track.genre)).map((genre) => (
+              <S.filterItem
+                key={genre}
+                onClick={() => {
+                  console.log("genre filter: ", genre);
+                }}
+              >
+                {genre}
+              </S.filterItem>
+            ))}
+          />
+        )}
       </S.filterDiv>
 
       <S.filterDiv>
@@ -53,7 +65,7 @@ export function TrackListFilter({ tracks, currentPage }) {
                 key={item}
                 onClick={() => {
                   dispatch(setFilterPlaylist({ sort: item }));
-                  console.log("year filter: ", item);
+                  console.log("year sort: ", item);
                 }}
               >
                 {item}

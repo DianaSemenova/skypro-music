@@ -5,13 +5,24 @@ import { useEffect } from "react";
 import { TrackList } from "../../components/TrackList/TrackList";
 import { useGetSelectionsQuery } from "../../servicesQuery/tracks";
 import { setCurrentPage, setCategoryArr } from "../../store/slices/tracksSlice";
-import { categoryArrSelector } from "../../store/selectors/tracks";
+import {
+  categoryArrSelector,
+  filtersPlaylistSelector,
+} from "../../store/selectors/tracks";
 
 export function Category() {
   const categoryArr = useSelector(categoryArrSelector);
+  const filtred = useSelector(filtersPlaylistSelector);
   const params = useParams();
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetSelectionsQuery(Number(params.id));
+  const tracks = filtred?.isActiveSort ? filtred?.filterTracksArr : categoryArr;
+
+  useEffect(() => {
+    console.log("filterCategory", filtred.isActiveSort);
+    console.log("tracksCategory", tracks);
+    dispatch(setCategoryArr(data?.items));
+  }, [filtred.isActiveSort, tracks]);
 
   useEffect(() => {
     if (data) {
@@ -24,7 +35,7 @@ export function Category() {
   return (
     <TrackList
       title={data?.name}
-      tracks={categoryArr}
+      tracks={tracks}
       error={error}
       isLoading={isLoading}
     />

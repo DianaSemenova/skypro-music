@@ -16,12 +16,13 @@ export function Main() {
   const tracksAll = useSelector(allTracksSelector);
   const filtred = useSelector(filtersPlaylistSelector);
   const { data, isError, isLoading } = useGetTracksAllQuery();
-  const tracks = filtred?.isFiltered ? filtred?.filterTracksArr : tracksAll;
+  const tracks = filtred?.isActiveSort ? filtred?.filterTracksArr : tracksAll;
 
   useEffect(() => {
-    console.log("filter", filtred.isFiltered);
+    console.log("filter", filtred.isActiveSort);
     console.log("tracks", tracks);
-  }, [filtred.isFiltered, tracks]);
+    dispatch(setAllTracks(data));
+  }, [filtred.isActiveSort, tracks]);
 
   useEffect(() => {
     if (data) {

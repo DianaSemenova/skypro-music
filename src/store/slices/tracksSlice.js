@@ -12,8 +12,10 @@ const initialState = {
   categoryArr: [],
   currentPlaylist: [],
   FiltersPlaylist: {
+    authors: [],
+    isActiveAuthors: false,
     sort: "По умолчанию",
-    isFiltered: false,
+    isActiveSort: false,
     filterTracksArr: [],
   },
 };
@@ -79,7 +81,20 @@ export const trackSlice = createSlice({
     },
 
     setFilterPlaylist: (state, action) => {
-      const { sort } = action.payload;
+      const { sort, authors } = action.payload;
+
+      if (authors) {
+        if (state.FiltersPlaylist.authors.includes(authors)) {
+          state.FiltersPlaylist.authors = state.FiltersPlaylist.authors.filter(
+            (item) => item !== authors
+          );
+        } else {
+          state.FiltersPlaylist.authors = [
+            ...state.FiltersPlaylist.authors,
+            authors,
+          ];
+        }
+      }
 
       if (sort) {
         state.FiltersPlaylist.sort = sort;
@@ -87,6 +102,7 @@ export const trackSlice = createSlice({
 
       const getFilteredTracks = () => {
         let filterArray = [];
+        // список треков
 
         if (state.currentPage === "Main") {
           filterArray = state.allTracks;
@@ -99,20 +115,32 @@ export const trackSlice = createSlice({
           filterArray = state.categoryArr;
         }
 
+        // фильтрация
+
+        // *по исполнителю
+        if (state.FiltersPlaylist.authors.length > 0) {
+          state.FiltersPlaylist.isActiveAuthors = true;
+
+          filterArray = filterArray.filter((track) =>
+            state.FiltersPlaylist.authors.includes(track.author)
+          );
+        }
+
+        // сортировка по дате
         if (state.FiltersPlaylist.sort === "Сначала новые") {
-          state.FiltersPlaylist.isFiltered = true;
+          state.FiltersPlaylist.isActiveSort = true;
 
           filterArray = filterArray.sort(
             (a, b) => new Date(b.release_date) - new Date(a.release_date)
           );
         } else if (state.FiltersPlaylist.sort === "Сначала старые") {
-          state.FiltersPlaylist.isFiltered = true;
+          state.FiltersPlaylist.isActiveSort = true;
 
           filterArray = filterArray.sort(
             (a, b) => new Date(a.release_date) - new Date(b.release_date)
           );
         } else {
-          state.FiltersPlaylist.isFiltered = false;
+          state.FiltersPlaylist.isActiveSort = false;
         }
 
         return filterArray;
