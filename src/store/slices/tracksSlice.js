@@ -11,6 +11,11 @@ const initialState = {
   favouritesTracks: [],
   categoryArr: [],
   currentPlaylist: [],
+  FiltersPlaylist: {
+    sort: "По умолчанию",
+    isFiltered: false,
+    filterTracksArr: [],
+  },
 };
 
 const getShuffledAllTracks = (array) => {
@@ -30,7 +35,6 @@ export const trackSlice = createSlice({
       state.favouritesTracks = action.payload;
     },
 
-    
     setCategoryArr: (state, action) => {
       state.categoryArr = action.payload;
     },
@@ -73,6 +77,49 @@ export const trackSlice = createSlice({
       state.shuffledAllTracks =
         state.shuffled && getShuffledAllTracks(state.currentPlaylist);
     },
+
+    setFilterPlaylist: (state, action) => {
+      const { sort } = action.payload;
+
+      if (sort) {
+        state.FiltersPlaylist.sort = sort;
+      }
+
+      const getFilteredTracks = () => {
+        let filterArray = [];
+
+        if (state.currentPage === "Main") {
+          filterArray = state.allTracks;
+        }
+        if (state.currentPage === "Favoutites") {
+          filterArray = state.favouritesTracks;
+        }
+
+        if (state.currentPage === "Category") {
+          filterArray = state.categoryArr;
+        }
+
+        if (state.FiltersPlaylist.sort === "Сначала новые") {
+          state.FiltersPlaylist.isFiltered = true;
+
+          filterArray = filterArray.sort(
+            (a, b) => new Date(b.release_date) - new Date(a.release_date)
+          );
+        } else if (state.FiltersPlaylist.sort === "Сначала старые") {
+          state.FiltersPlaylist.isFiltered = true;
+
+          filterArray = filterArray.sort(
+            (a, b) => new Date(a.release_date) - new Date(b.release_date)
+          );
+        } else {
+          state.FiltersPlaylist.isFiltered = false;
+        }
+
+        return filterArray;
+      };
+
+      state.FiltersPlaylist.filterTracksArr = getFilteredTracks();
+    },
   },
 });
 
@@ -86,7 +133,8 @@ export const {
   setFavouriteTracksAll,
   setCurrentPage,
   setCurrentPlaylist,
-  setCategoryArr
+  setCategoryArr,
+  setFilterPlaylist,
 } = trackSlice.actions;
 
 export default trackSlice.reducer;
