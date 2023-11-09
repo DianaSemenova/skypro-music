@@ -7,14 +7,20 @@ import {
   setCurrentPage,
 } from "../../store/slices/tracksSlice";
 import { TrackList } from "../../components/TrackList/TrackList";
-import { favouritesTracksSelector, filtersPlaylistSelector } from "../../store/selectors/tracks";
+import {
+  favouritesTracksSelector,
+  filtersPlaylistSelector,
+} from "../../store/selectors/tracks";
 
 export function Favourites() {
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetFavouriteTracksAllQuery();
   const favouritesTracks = useSelector(favouritesTracksSelector);
   const filtred = useSelector(filtersPlaylistSelector);
-  const tracks = filtred?.isActiveSort ? filtred?.filterTracksArr : favouritesTracks;
+  const tracks =
+    filtred?.isActiveSort || filtred?.isActiveAuthors || filtred?.isActiveGenres
+      ? filtred?.filterTracksArr
+      : favouritesTracks;
 
   useEffect(() => {
     console.log("filterFavourites", filtred.isActiveSort);

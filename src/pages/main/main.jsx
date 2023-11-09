@@ -1,10 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { TrackList } from "../../components/TrackList/TrackList";
-import {
-  setAllTracks,
-  setCurrentPage,
-} from "../../store/slices/tracksSlice";
+import { setAllTracks, setCurrentPage } from "../../store/slices/tracksSlice";
 import { useGetTracksAllQuery } from "../../servicesQuery/tracks";
 import {
   allTracksSelector,
@@ -16,7 +13,10 @@ export function Main() {
   const tracksAll = useSelector(allTracksSelector);
   const filtred = useSelector(filtersPlaylistSelector);
   const { data, isError, isLoading } = useGetTracksAllQuery();
-  const tracks = filtred?.isActiveSort ? filtred?.filterTracksArr : tracksAll;
+  const tracks =
+    filtred?.isActiveSort || filtred?.isActiveAuthors || filtred?.isActiveGenres
+      ? filtred?.filterTracksArr
+      : tracksAll;
 
   useEffect(() => {
     console.log("filter", filtred.isActiveSort);

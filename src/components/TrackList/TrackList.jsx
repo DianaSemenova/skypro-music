@@ -35,10 +35,12 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
 
   useEffect(() => {
     dispatch(setFilterPlaylist({ sort: "По умолчанию" }));
+    // dispatch(setFilterPlaylist({ authors: "" }));
+    // dispatch(setFilterPlaylist({ genres: "" }));
   }, [title]);
 
   const handleCurrentTrack = (track) => {
-    if (!filtersPlaylist.isActiveSort) {
+    if (!filtersPlaylist.isActiveSort && !filtersPlaylist?.isActiveAuthors) {
       if (currentPage === "Main") {
         dispatch(setCurrentPlaylist(allTracks));
       }
@@ -66,7 +68,17 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
       <S.centerblockH2 className="centerblock__h2">
         {title || "Треки"}
       </S.centerblockH2>
-      <TrackListFilter tracks={tracks} currentPage={currentPage} />
+      <TrackListFilter
+        tracks={currentPage === "Main" ? allTracks : categoryArr}
+        // tracks={
+        //   (currentPage === "Main"
+        //     ? allTracks
+        //     : (currentPage === "Favourites"
+        //     ? favouritesTracks
+        //     : categoryArr))
+        // }
+        currentPage={currentPage}
+      />
       <S.centerblockContent>
         <TrackListTitle />
         {error ? (

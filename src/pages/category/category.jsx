@@ -16,7 +16,10 @@ export function Category() {
   const params = useParams();
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetSelectionsQuery(Number(params.id));
-  const tracks = filtred?.isActiveSort ? filtred?.filterTracksArr : categoryArr;
+  const tracks =
+    filtred?.isActiveSort || filtred?.isActiveAuthors
+      ? filtred?.filterTracksArr
+      : categoryArr;
 
   useEffect(() => {
     console.log("filterCategory", filtred.isActiveSort);

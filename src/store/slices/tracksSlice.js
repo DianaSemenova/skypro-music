@@ -14,6 +14,8 @@ const initialState = {
   FiltersPlaylist: {
     authors: [],
     isActiveAuthors: false,
+    genres: [],
+    isActiveGenres: false,
     sort: "По умолчанию",
     isActiveSort: false,
     filterTracksArr: [],
@@ -81,7 +83,7 @@ export const trackSlice = createSlice({
     },
 
     setFilterPlaylist: (state, action) => {
-      const { sort, authors } = action.payload;
+      const { sort, authors, genres } = action.payload;
 
       if (authors) {
         if (state.FiltersPlaylist.authors.includes(authors)) {
@@ -96,6 +98,19 @@ export const trackSlice = createSlice({
         }
       }
 
+      if (genres) {
+        if (state.FiltersPlaylist.genres.includes(genres)) {
+          state.FiltersPlaylist.genres = state.FiltersPlaylist.genres.filter(
+            (item) => item !== genres
+          );
+        } else {
+          state.FiltersPlaylist.genres = [
+            ...state.FiltersPlaylist.genres,
+            genres,
+          ];
+        }
+      }
+
       if (sort) {
         state.FiltersPlaylist.sort = sort;
       }
@@ -103,7 +118,6 @@ export const trackSlice = createSlice({
       const getFilteredTracks = () => {
         let filterArray = [];
         // список треков
-
         if (state.currentPage === "Main") {
           filterArray = state.allTracks;
         }
@@ -123,6 +137,15 @@ export const trackSlice = createSlice({
 
           filterArray = filterArray.filter((track) =>
             state.FiltersPlaylist.authors.includes(track.author)
+          );
+        }
+
+        // *по жанрам
+        if (state.FiltersPlaylist.genres.length > 0) {
+          state.FiltersPlaylist.isActiveGenres = true;
+
+          filterArray = filterArray.filter((track) =>
+            state.FiltersPlaylist.genres.includes(track.genre)
           );
         }
 

@@ -15,6 +15,10 @@ export function TrackListFilter({ tracks, currentPage }) {
     console.log("author filter: ", selectedFiltersPlaylist?.authors);
   }, [selectedFiltersPlaylist?.authors]);
 
+  useEffect(() => {
+    console.log("genres filter: ", selectedFiltersPlaylist?.genres);
+  }, [selectedFiltersPlaylist?.genres]);
+
   return (
     <S.centerblockFilter>
       <S.filterDiv>
@@ -41,12 +45,14 @@ export function TrackListFilter({ tracks, currentPage }) {
             nameCategory="жанру"
             isActiveCategory={activeCategoryFilter}
             setActiveCategory={setActiveCategoryFilter}
+            numberSelectedValues={selectedFiltersPlaylist?.genres.length}
             content={uniq(tracks?.map((track) => track.genre)).map((genre) => (
               <S.filterItem
                 key={genre}
                 onClick={() => {
-                  console.log("genre filter: ", genre);
+                  dispatch(setFilterPlaylist({ genres: genre }));
                 }}
+                $isSelected={selectedFiltersPlaylist?.genres.includes(genre)}
               >
                 {genre}
               </S.filterItem>
