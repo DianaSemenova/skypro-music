@@ -4,6 +4,9 @@ export const filterCategoryName = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
 `;
 
 export const filterButton = styled.button`
@@ -74,4 +77,21 @@ export const filterList = styled.ul`
   &::-webkit-scrollbar-thumb:active {
     background-color: #4b4949;
   }
+`;
+
+export const selectedFilterCount = styled.div`
+  background-color: #ad61ff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 13px; /* 100% */
 `;

@@ -32,7 +32,7 @@ export const filterTitle = styled.div`
 `;
 export const filterItem = styled.li`
   font-family: "StratosSkyeng", sans-serif;
-  color: #fff;
+  color: ${(props) => (props.$isSelected ? "#b672ff" : "#fff")};
   font-variant-numeric: lining-nums proportional-nums;
   font-size: 20px;
   font-style: normal;

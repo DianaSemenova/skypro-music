@@ -21,12 +21,14 @@ export function TrackListFilter({ tracks, currentPage }) {
         <S.filterTitle>Искать по:</S.filterTitle>
         <TrackListFilterCategory
           nameCategory="исполнителю"
+          numberSelectedValues={selectedFiltersPlaylist?.authors.length}
           content={uniq(tracks?.map((track) => track?.author)).map((author) => (
             <S.filterItem
               key={author}
               onClick={() => {
                 dispatch(setFilterPlaylist({ authors: author }));
               }}
+              $isSelected={selectedFiltersPlaylist?.authors.includes(author)}
             >
               {author}
             </S.filterItem>
@@ -59,6 +61,9 @@ export function TrackListFilter({ tracks, currentPage }) {
           nameCategory={selectedFiltersPlaylist?.sort}
           isActiveCategory={activeCategoryFilter}
           setActiveCategory={setActiveCategoryFilter}
+          numberSelectedValues={
+            selectedFiltersPlaylist?.sort === "По умолчанию" ? 0 : 1
+          }
           content={["По умолчанию", "Сначала новые", "Сначала старые"].map(
             (item) => (
               <S.filterItem
@@ -67,6 +72,7 @@ export function TrackListFilter({ tracks, currentPage }) {
                   dispatch(setFilterPlaylist({ sort: item }));
                   console.log("year sort: ", item);
                 }}
+                $isSelected={selectedFiltersPlaylist?.sort.includes(item)}
               >
                 {item}
               </S.filterItem>

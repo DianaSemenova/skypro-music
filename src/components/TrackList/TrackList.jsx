@@ -34,7 +34,7 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
   const filtersPlaylist = useSelector(filtersPlaylistSelector);
 
   useEffect(() => {
-    dispatch(setFilterPlaylist({ sort: "по умолчанию" }));
+    dispatch(setFilterPlaylist({ sort: "По умолчанию" }));
   }, [title]);
 
   const handleCurrentTrack = (track) => {
