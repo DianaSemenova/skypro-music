@@ -87,7 +87,9 @@ export const trackSlice = createSlice({
     setFilterPlaylist: (state, action) => {
       const { sort, authors, genres, search } = action.payload;
 
-      if (authors) {
+      if (authors === "") {
+        state.FiltersPlaylist.authors = [];
+      } else if (authors) {
         if (state.FiltersPlaylist.authors.includes(authors)) {
           state.FiltersPlaylist.authors = state.FiltersPlaylist.authors.filter(
             (item) => item !== authors
@@ -100,7 +102,9 @@ export const trackSlice = createSlice({
         }
       }
 
-      if (genres) {
+      if (genres === "") {
+        state.FiltersPlaylist.genres = [];
+      } else if (genres) {
         if (state.FiltersPlaylist.genres.includes(genres)) {
           state.FiltersPlaylist.genres = state.FiltersPlaylist.genres.filter(
             (item) => item !== genres
@@ -130,7 +134,7 @@ export const trackSlice = createSlice({
         if (state.currentPage === "Main") {
           filterArray = state.allTracks;
         }
-        if (state.currentPage === "Favoutites") {
+        if (state.currentPage === "Favourites") {
           filterArray = state.favouritesTracks;
         }
 
