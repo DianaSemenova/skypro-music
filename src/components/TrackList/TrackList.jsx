@@ -35,6 +35,7 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
 
   useEffect(() => {
     dispatch(setFilterPlaylist({ sort: "По умолчанию" }));
+    dispatch(setFilterPlaylist({ search: "" }));
     // dispatch(setFilterPlaylist({ authors: "" }));
     // dispatch(setFilterPlaylist({ genres: "" }));
   }, [title]);
@@ -76,6 +77,7 @@ export function TrackList({ title, error, isLoading, tracks, isFavorites }) {
         //     : (currentPage === "Favourites"
         //     ? favouritesTracks
         //     : categoryArr))
+
         // }
         currentPage={currentPage}
       />

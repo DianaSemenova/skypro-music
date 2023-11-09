@@ -18,7 +18,10 @@ export function Favourites() {
   const favouritesTracks = useSelector(favouritesTracksSelector);
   const filtred = useSelector(filtersPlaylistSelector);
   const tracks =
-    filtred?.isActiveSort || filtred?.isActiveAuthors || filtred?.isActiveGenres
+    filtred?.isActiveSort ||
+    filtred?.isActiveAuthors ||
+    filtred?.isActiveGenres ||
+    filtred?.isActiveSearch
       ? filtred?.filterTracksArr
       : favouritesTracks;
 

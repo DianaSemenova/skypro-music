@@ -18,6 +18,8 @@ const initialState = {
     isActiveGenres: false,
     sort: "По умолчанию",
     isActiveSort: false,
+    search: "",
+    isActiveSearch: false,
     filterTracksArr: [],
   },
 };
@@ -83,7 +85,7 @@ export const trackSlice = createSlice({
     },
 
     setFilterPlaylist: (state, action) => {
-      const { sort, authors, genres } = action.payload;
+      const { sort, authors, genres, search } = action.payload;
 
       if (authors) {
         if (state.FiltersPlaylist.authors.includes(authors)) {
@@ -113,6 +115,13 @@ export const trackSlice = createSlice({
 
       if (sort) {
         state.FiltersPlaylist.sort = sort;
+      }
+
+      if (search?.length > 0) {
+        state.FiltersPlaylist.search = search;
+      } else {
+        state.FiltersPlaylist.search = "";
+        state.FiltersPlaylist.isActiveSearch = false;
       }
 
       const getFilteredTracks = () => {
@@ -164,6 +173,17 @@ export const trackSlice = createSlice({
           );
         } else {
           state.FiltersPlaylist.isActiveSort = false;
+        }
+
+        // поиск
+        if (state.FiltersPlaylist.search.length > 0) {
+          state.FiltersPlaylist.isActiveSearch = true;
+
+          filterArray = filterArray.filter((item) =>
+            item.name
+              .toLocaleLowerCase()
+              .includes(state.FiltersPlaylist.search.toLocaleLowerCase())
+          );
         }
 
         return filterArray;
