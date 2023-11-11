@@ -7,12 +7,30 @@ import {
   setCurrentPage,
 } from "../../store/slices/tracksSlice";
 import { TrackList } from "../../components/TrackList/TrackList";
-import { favouritesTracksSelector } from "../../store/selectors/tracks";
+import {
+  favouritesTracksSelector,
+  filtersPlaylistSelector,
+} from "../../store/selectors/tracks";
 
 export function Favourites() {
   const dispatch = useDispatch();
-  const { data, error, isLoading } = useGetFavouriteTracksAllQuery();
   const favouritesTracks = useSelector(favouritesTracksSelector);
+  const filtred = useSelector(filtersPlaylistSelector);
+  const { data, error, isLoading } = useGetFavouriteTracksAllQuery();
+
+  const tracks =
+    filtred?.isActiveSort ||
+    filtred?.isActiveAuthors ||
+    filtred?.isActiveGenres ||
+    filtred?.isActiveSearch
+      ? filtred?.filterTracksArr
+      : favouritesTracks;
+
+  useEffect(() => {
+    console.log("filterFavourites", filtred.isActiveSort);
+    console.log("tracksFavourites", tracks);
+    dispatch(setFavouriteTracksAll(data));
+  }, [filtred.isActiveSort, tracks]);
 
   useEffect(() => {
     if (data) {
@@ -23,27 +41,12 @@ export function Favourites() {
   }, [data]);
 
   return (
-    <>
-      <TrackList
-        title="Мои треки"
-        tracks={favouritesTracks}
-        error={error}
-        isLoading={isLoading}
-        isFavorites
-      />
-      {isLoading && <div>Загрузка...</div>}
-      {error && <div>{error}</div>}
-    </>
+    <TrackList
+      title="Мои треки"
+      tracks={tracks}
+      error={error}
+      isLoading={isLoading}
+      isFavorites
+    />
   );
-
-  // return (
-  //   <S.wrapper>
-  //     <S.container>
-  //       <S.main>
-  //         <h1>FavouritesPages</h1>
-  //       </S.main>
-  //       <footer className="footer" />
-  //     </S.container>
-  //   </S.wrapper>
-  // );
 }

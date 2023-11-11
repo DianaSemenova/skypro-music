@@ -19,6 +19,8 @@ export const centerblockContent = styled.div`
   flex-direction: column;
 `;
 
+
+
 export const contentPlaylist = styled.ul`
   display: -webkit-box;
   display: -ms-flexbox;
@@ -28,6 +30,32 @@ export const contentPlaylist = styled.ul`
   -ms-flex-direction: column;
   flex-direction: column;
   overflow-y: auto;
+  height: 500px;
+
+  /* полоса прокрутки (скроллбар) */
+  // &::-webkit-scrollbar {
+  //   width: 25px;
+  // }
+
+  &::-webkit-scrollbar-track {
+    background-color: white;
+    border-radius: 2px;
+  }
+  /* ползунок скроллбара */
+  &::-webkit-scrollbar-thumb {
+    // border-radius: 5px;
+    box-shadow: inset 1px 1px 10px #f3faf7;
+    background-color: #909090;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background-color: #4b4949;
+  }
+  /* Стрелки */
+  &::-webkit-scrollbar-button:vertical:start:decrement {
+    background-color: #909090;
+  }
 `;
 
 export const playlistItem = styled.li`
