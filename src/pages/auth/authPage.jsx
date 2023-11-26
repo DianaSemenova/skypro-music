@@ -19,6 +19,10 @@ export function AuthPage({ setUser }) {
   const [postToken] = useAccessTokenUserMutation();
   // const { refreshToken } = useSelector((store) => store.token);
 
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
+
   const responseToken = async () => {
     await postToken({ email, password })
       .unwrap()
@@ -47,8 +51,6 @@ export function AuthPage({ setUser }) {
     } finally {
       setOffButton(false);
     }
-
-   
   };
 
   const handleRegister = async () => {
